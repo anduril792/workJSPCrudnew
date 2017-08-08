@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機: 127.0.0.1
--- 產生時間： 2017-08-03 06:46:41
+-- 產生時間： 2017-08-08 10:13:21
 -- 伺服器版本: 10.1.24-MariaDB
 -- PHP 版本： 7.1.6
 
@@ -43,9 +43,30 @@ CREATE TABLE `article` (
 --
 
 INSERT INTO `article` (`idarticle`, `libelle`, `description`, `prix`, `category`, `qte`, `img`) VALUES
-(15, '測試四', 'DGW', 234, 'BOSTON', 4, 'images/null'),
-(23, 'salkfj', 'sadlf;kj', 123, 'BOSTON', 43, 'images/24212-03.jpg'),
-(24, 'dag', 'oudiu', 112312, 'BOSTON', 46, 'images/02330-01.jpg');
+(15, '測試四', 'DGW', 234, 'BOSTON', 3, 'images/null'),
+(24, 'dag', 'oudiu', 112312, 'BOSTON', 46, 'images/02330-01.jpg'),
+(25, '測試三', '測試', 123, 'SHOULDER', 213, 'images/12710-05.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `msg`
+--
+
+CREATE TABLE `msg` (
+  `idMsg` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `subject` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `message` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 資料表的匯出資料 `msg`
+--
+
+INSERT INTO `msg` (`idMsg`, `name`, `email`, `subject`, `message`) VALUES
+(3, '測試', 'asd@asd', '測試', '測試');
 
 -- --------------------------------------------------------
 
@@ -67,18 +88,20 @@ CREATE TABLE `register` (
 --
 
 INSERT INTO `register` (`id`, `name`, `password`, `email`, `sex`, `country`) VALUES
-(2, 'asdas', 'sadasd', 'dddk@javatpoint.com', 'Male', 'India'),
 (17, 'arun', 'kumar', 'arun@gmail.com', 'Male', 'India'),
-(19, 'sonoo', 'jaiswal', 'sonoo@javatpoint.com', 'male', 'Pakistan'),
+(19, 'sfdsaf', 'jaiswal', 'sonoo@javatpoint.com', 'female', 'India'),
 (20, 'Ashok', 'ashok', 'ashok@javatpoint.com', 'male', 'India'),
 (25, 'wang', '123', '123@asd', 'male', 'India'),
 (28, '王', '123', '123@123', 'male', 'India'),
 (48, '陳', '123', '123@123', 'male', 'India'),
-(50, 'sam', '123', '123@123', 'male', 'India'),
+(50, 'samtest', '12345', '123@123', 'female', 'India'),
 (51, 'lksjglskjg', '12345', 'fdsf@sfaf', 'male', 'India'),
 (52, 'sddsag', 'qwert', '123@ldskfjlgdsk', 'male', 'Berma'),
 (53, 'SDF', '1234', '123@sdfa', 'male', 'India'),
-(54, 'SDF', '12345', '123@sdfa', 'male', 'India');
+(54, 'SDF', '12345', '123@sdfa', 'male', 'India'),
+(55, 'sdaflkjl', '123', 'safd@sdfklh', 'male', 'Other'),
+(56, 'tom', '123', '213@123', 'male', 'India'),
+(57, 'sam', '123', '123@123', 'male', 'India');
 
 --
 -- 已匯出資料表的索引
@@ -89,6 +112,12 @@ INSERT INTO `register` (`id`, `name`, `password`, `email`, `sex`, `country`) VAL
 --
 ALTER TABLE `article`
   ADD PRIMARY KEY (`idarticle`);
+
+--
+-- 資料表索引 `msg`
+--
+ALTER TABLE `msg`
+  ADD PRIMARY KEY (`idMsg`);
 
 --
 -- 資料表索引 `register`
@@ -104,12 +133,17 @@ ALTER TABLE `register`
 -- 使用資料表 AUTO_INCREMENT `article`
 --
 ALTER TABLE `article`
-  MODIFY `idarticle` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `idarticle` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+--
+-- 使用資料表 AUTO_INCREMENT `msg`
+--
+ALTER TABLE `msg`
+  MODIFY `idMsg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- 使用資料表 AUTO_INCREMENT `register`
 --
 ALTER TABLE `register`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;COMMIT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
