@@ -181,7 +181,7 @@ public class ArticleDao
 		return list;
 	}
 
-	public static Article getArticleById(int idArticle)
+	public Article getArticleById(int idArticle)
 	{
 		Article a = null;
 		try
@@ -211,7 +211,7 @@ public class ArticleDao
 		return a;
 	}
 	
-	public static List<Article> getAllArticleByPage(int page, int pagesize)
+	public List<Article> getAllArticleByPage(int page, int pagesize)
 	{
 		List<Article> list = new ArrayList<Article>();
 		int mypage = page;

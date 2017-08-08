@@ -35,7 +35,7 @@
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">商品種類 <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">BOSTON</a></li>
+							<li><a href="${pageContext.request.contextPath}/pageServlet?category=BOSTON">BOSTON</a></li>
 							<li><a href="#">TOTE</a></li>
 							<li class="divider"></li>
 							<li><a href="#">MESSENGER</a></li>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	
+	<servlet>
+		<servlet-name>FindArticleByIdServlet</servlet-name>
+		<servlet-class>com.javatpoint.servlet.FindArticleByIdServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FindArticleByIdServlet</servlet-name>
+		<url-pattern>/servlet/findArticleByIdServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>PageServlet</servlet-name>
+		<servlet-class>com.javatpoint.servlet.PageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PageServlet</servlet-name>
+		<url-pattern>/pageServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>FindArticleInfoServlet</servlet-name>
+		<servlet-class>com.javatpoint.servlet.FindArticleInfoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FindArticleInfoServlet</servlet-name>
+		<url-pattern>/findArticleInfoServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>AddCartServlet</servlet-name>
+		<servlet-class>com.javatpoint.servlet.AddCartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddCartServlet</servlet-name>
+		<url-pattern>/addCartServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ChangeNumServlet</servlet-name>
+		<servlet-class>com.javatpoint.servlet.ChangeNumServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangeNumServlet</servlet-name>
+		<url-pattern>/changeNumServlet</url-pattern>
+	</servlet-mapping>
+</web-app>
