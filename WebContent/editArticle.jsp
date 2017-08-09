@@ -6,15 +6,15 @@
 <%
 	MultipartRequest multi = new MultipartRequest(request, "C:/Users/T450/eclipse-workspace/JSPCrud/WebContent/images");
 	String fname ="images/"+ multi.getFilesystemName("file");
-	int idArticle = Integer.parseInt(multi.getParameter("idArticle"));
-	String libelle = new String(multi.getParameter("libelle").getBytes("ISO-8859-1"), "UTF-8");
-	String desc = new String(multi.getParameter("desc").getBytes("ISO-8859-1"), "UTF-8");
-	Double prix = Double.parseDouble(multi.getParameter("prix"));
+	String id = multi.getParameter("id");
+	String name = new String(multi.getParameter("name").getBytes("ISO-8859-1"), "UTF-8");
+	String description = new String(multi.getParameter("description").getBytes("ISO-8859-1"), "UTF-8");
+	Double price = Double.parseDouble(multi.getParameter("price"));
 	String category = new String(multi.getParameter("category").getBytes("ISO-8859-1"), "UTF-8");
-	int qte=Integer.parseInt(multi.getParameter("qte"));
+	int pnum=Integer.parseInt(multi.getParameter("pnum"));
 	
-	Article act = new Article(idArticle, libelle, desc, prix, category, qte, fname);
-	ArticleDao dao = new ArticleDao();
+	ProductForList act = new ProductForList(id, name, price, category, pnum, fname, description);
+	ProductDaoForList dao = new ProductDaoForList();
 
 	if(dao.update(act))
 	{

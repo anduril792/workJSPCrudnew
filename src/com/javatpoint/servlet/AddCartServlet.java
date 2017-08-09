@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.javatpoint.bean.Article;
-import com.javatpoint.dao.ArticleDao;
+import com.javatpoint.bean.Product;
+import com.javatpoint.service.ProductService;
 
 public class AddCartServlet extends HttpServlet {
 
@@ -21,26 +21,27 @@ public class AddCartServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		int idArticle = Integer.valueOf(request.getParameter("idArticle"));
+		String id = request.getParameter("id");
 		
-		ArticleDao ad = new ArticleDao();
+		ProductService bs = new ProductService();
 		
-		Article a = ad.getArticleById(idArticle);
+		Product b = bs.findBookById(id);
 		
 		//從session中的購物車取出 來
 		HttpSession session = request.getSession();
-		Map<Article, String> cart = (Map<Article, String>) session.getAttribute("cart");
+		Map<Product, String> cart = (Map<Product, String>) session.getAttribute("cart");
 		int num = 1;
 		//如何是第一次訪問，沒有購物車對象，我們就創建 一個購物車對象
 		if(cart==null){
-			cart = new HashMap<Article, String>();		
+			cart = new HashMap<Product, String>();
+			
 		}
-		//查看當前集合中是否存在這本書,如果有就把數據取出來加1;
-		if(cart.containsKey(a)){
-			num=Integer.parseInt(cart.get(a))+1;
+		//查看當前集合中是否存在b這本書,如果有就把數據取出來加1;
+		if(cart.containsKey(b)){
+			num=Integer.parseInt(cart.get(b))+1;
 		}
 		//把圖書放入購物車
-		cart.put(a, num+"");
+		cart.put(b, num+"");
 		
 		//把cart對象放回到session作用域中
 		session.setAttribute("cart", cart);

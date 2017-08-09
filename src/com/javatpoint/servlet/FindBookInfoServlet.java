@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.javatpoint.bean.Article;
-import com.javatpoint.dao.ArticleDao;
+import com.javatpoint.bean.Product;
+import com.javatpoint.service.ProductService;
 
-public class FindArticleInfoServlet extends HttpServlet {
+public class FindBookInfoServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		int idArticle = Integer.valueOf(request.getParameter("id"));
+		String id = request.getParameter("id");
 		
-		ArticleDao ad = new ArticleDao();
-		Article article = ad.getArticleById(idArticle);
+		ProductService bs = new ProductService();
+		Product book = bs.findBookById(id);
 		
-		request.setAttribute("a", article);
+		request.setAttribute("b", book);
 		request.getRequestDispatcher("/product_info.jsp").forward(request, response);
 		
 	}

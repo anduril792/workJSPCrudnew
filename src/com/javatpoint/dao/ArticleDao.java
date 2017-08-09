@@ -180,8 +180,10 @@ public class ArticleDao
 		}
 		return list;
 	}
+	
+	
 
-	public Article getArticleById(int idArticle)
+	public static Article getArticleById(int idArticle)
 	{
 		Article a = null;
 		try
@@ -211,14 +213,56 @@ public class ArticleDao
 		return a;
 	}
 	
-	public List<Article> getAllArticleByPage(int page, int pagesize)
+	public static List<Article> getAllArticleByPage(int page, int pagesize, String category)
 	{
 		List<Article> list = new ArrayList<Article>();
+		String sql = "select * from article";
+		if(!"".equals(category))
+		{
+			sql += " where category=?";
+		}
+		sql += " limit ?,?";
 		int mypage = page;
 		try
 		{
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from article limit ?,?");
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			if(!"".equals(category))
+			{
+				ps.setString(1, category);
+				ps.setInt(2, mypage);
+				ps.setInt(3, pagesize);
+			}
+			else
+			{
+				ps.setInt(1, mypage);
+				ps.setInt(2, pagesize);
+			}
+			ResultSet rs = ps.executeQuery();
+			while (rs.next())
+			{
+				list.add(new Article(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDouble(4),rs.getString(5),rs.getInt(6),rs.getString(7)));
+			}
+			ps.close();
+			con.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+		}
+		return list;
+	}
+	
+	public static List<Article> getAllArticleByPage(int page, int pagesize)
+	{
+		List<Article> list = new ArrayList<Article>();
+		String sql = "select * from article limit ?,?";
+		int mypage = page;
+		try
+		{
+			Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, mypage);
 			ps.setInt(2, pagesize);
 			ResultSet rs = ps.executeQuery();

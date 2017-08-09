@@ -9,25 +9,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.javatpoint.bean.Article;
+import com.javatpoint.bean.Product;
 
 public class ChangeNumServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int idArticle = Integer.valueOf(request.getParameter("idArticle"));
+		String id = request.getParameter("id");
 		String num = request.getParameter("num");
-
-		Article a = new Article();
-		a.setIdArticle(idArticle);
+		//注：只能重写id的hashcode
+		Product b = new Product();
+		b.setId(id);
 		
 		HttpSession session = request.getSession();
-		Map<Article, String> cart = (Map<Article, String>) session.getAttribute("cart");
+		Map<Product, String> cart = (Map<Product, String>) session.getAttribute("cart");
+		//如果商品数据为0，就删除对象
 		if("0".equals(num)){
-			cart.remove(a);
+			cart.remove(b);
 		}
-		if(cart.containsKey(a)){
-			cart.put(a, num);
+		//判断如果找到与id相同的书，
+		if(cart.containsKey(b)){
+			cart.put(b, num);
 		}
 		
 		response.sendRedirect(request.getContextPath()+"/cart.jsp");

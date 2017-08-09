@@ -33,23 +33,23 @@
 		}
 	}
 
-	List<Article> list=ArticleDao.getAllArticle();
+	List<ProductForList> list = ProductDaoForList.getAllProductByPage(pagenum, pagesize);
 	request.setCharacterEncoding("UTF-8");
 	request.setAttribute("list",list);
 	
-	int TotalNum = ArticleDao.ArticleSize();
+	int TotalNum = ProductDaoForList.ProductSize();
 	int TotalPage = (int)Math.ceil(TotalNum / (double)10);
 %>
 
 <table border="1" width="90%">
-<tr><th>Id</th><th>商品名稱</th><th>描述</th><th>價格</th><th>種類</th><th>庫存</th><th>圖片</th><th>修改</th><th>刪除</th></tr>
-<c:forEach items="${list}" var="a">
-	<tr><td>${a.getIdArticle()}</td><td>${a.getLibelle()}</td><td>${a.getDesc()}</td><td>${a.getPrix()}</td><td>${a.getCate()}</td><td>${a.getQte()}</td><td><img src="${a.getImg()}"></td><td><a href="editArticleform.jsp?idArticle=${a.getIdArticle()}">Edit</a></td><td><a href="delArticle.jsp?idArticle=${a.getIdArticle()}">Delete</a></td></tr>
+<tr><th>Id</th><th>商品名稱</th><th>價格</th><th>種類</th><th>庫存</th><th>圖片</th><th>描述</th><th>修改</th><th>刪除</th></tr>
+<c:forEach items="${list}" var="p">
+	<tr><td>${p.getId()}</td><td>${p.getName()}</td><td>${p.getPrice()}</td><td>${p.getCategory()}</td><td>${p.getPnum()}</td><td><img src="${p.getImg_url()}"></td><td>${p.getDescription()}</td><td><a href="editArticleform.jsp?id=${p.getId()}">Edit</a></td><td><a href="delArticle.jsp?id=${p.getId()}">Delete</a></td></tr>
 </c:forEach>
 </table>
 
 <div align="center">
-	<form action="viewusers.jsp" id="pageform" method="get">
+	<form action="ArticleListPage.jsp" id="pageform" method="get">
 		<select name="page" id="page" onchange="pageform.submit()">
 			<%
 				for(int i=1;i<=TotalPage;i++)
@@ -69,7 +69,7 @@
 			for(int j=1;j<=TotalPage;j++)
 			{
 				%>
-					<td <%if(j == Integer.valueOf(strPage)){%>bgcolor="#FF3300"<%} %>><a href="viewusers.jsp?page=<%=j %>">&nbsp<%=j %>&nbsp</a></td>
+					<td <%if(j == Integer.valueOf(strPage)){%>bgcolor="#FF3300"<%} %>><a href="ArticleListPage.jsp?page=<%=j %>">&nbsp<%=j %>&nbsp</a></td>
 				<% 
 			}
 		%>

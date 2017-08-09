@@ -29,6 +29,14 @@
 		<url-pattern>/findArticleInfoServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>FindBookInfoServlet</servlet-name>
+		<servlet-class>com.javatpoint.servlet.FindBookInfoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FindBookInfoServlet</servlet-name>
+		<url-pattern>/findBookInfoServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>AddCartServlet</servlet-name>
 		<servlet-class>com.javatpoint.servlet.AddCartServlet</servlet-class>
 	</servlet>

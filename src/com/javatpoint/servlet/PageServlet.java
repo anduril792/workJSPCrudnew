@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import com.javatpoint.bean.Article;
-import com.javatpoint.dao.ArticleDao;
+import com.javatpoint.bean.PageBean;
+import com.javatpoint.bean.Product;
+import com.javatpoint.service.ProductService;
 
 public class PageServlet extends HttpServlet {
 
@@ -22,22 +22,24 @@ public class PageServlet extends HttpServlet {
 			category="";
 		}
 		//初始化每頁顯示的記錄數
-		int pagesize = 4;
+		int pageSize = 6;
 		
-		int page = 1;//當前頁
-		String currPage = request.getParameter("page");//從上一頁或下一頁得到的數據
+		int currentPage = 1;//當前頁
+		String currPage = request.getParameter("currentPage");//從上一頁或下一頁得到的數據
 		if(currPage!=null&&!"".equals(currPage)){//第一次訪問資源時，currPage可能是null
-			page = Integer.parseInt(currPage);
+			currentPage = Integer.parseInt(currPage);
 		}
 		
-		ArticleDao ad = new ArticleDao();
-		List<Article> list = ad.getAllArticleByPage(page, pagesize);
+		ProductService bs = new ProductService();
+		//分頁查詢，并返回PageBean對象
+		PageBean pb = bs.findBooksPage(currentPage,pageSize,category);
+		List<Product> list =bs.findAllBooks();
 		
 		/*if(list!=null){
 		request.setAttribute("products", list);
 		request.getRequestDispatcher("/admin/products/list.jsp").forward(request, response); 
 		}*/
-		request.setAttribute("list", list);
+		request.setAttribute("pb", pb);
 		request.getRequestDispatcher("/product_list.jsp").forward(request, response);
 	}
 

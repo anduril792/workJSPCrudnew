@@ -15,9 +15,9 @@
 
 <c:if test="${user.isValid() }">
 <form action="addproduct.jsp" method="post" enctype="multipart/form-data" >
-<p>產品名稱 : <input type="text" name="libelle" id="libelle" ></p>
-<p>描述 : <input type="text" name="desc" id="desc" ></p>
-<p>價格 : <input type="text" name="prix" id="prix" ></p>
+<p>ID : <input type="text" name="id" id="id" ></p>
+<p>產品名稱 : <input type="text" name="name" id="name" ></p>
+<p>價格 : <input type="text" name="price" id="price" ></p>
 <p>種類 : <select name="category" id="category" style="width:155px">
 			<option>BOSTON</option>
 			<option>TOTE</option>
@@ -29,6 +29,7 @@
 </p>
 <p>庫存 : <input type="text" name="qte" id="qte" ></p>
 <p>圖片 : <input type="file" name="file" id="file" ></p>
+<p>描述 : <input type="text" name="description" id="description" ></p>
 <p><input type="submit" value="上傳"></p>
 </form>
 <p><a href="ArticleListPage.jsp" >商品列表</a></p>
