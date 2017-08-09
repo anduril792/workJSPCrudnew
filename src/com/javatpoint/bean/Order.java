@@ -11,7 +11,7 @@ public class Order {
 	private String receiverPhone; // 收貨人電話
 	private int paystate; // 訂單狀態
 	private Date ordertime; // 下單時間
-	private User user;
+	private int userid;
 	private List<OrderItem> orderItems;//表示一個order對象，對應多個orderitem
 	
 	public List<OrderItem> getOrderItems() {
@@ -20,11 +20,11 @@ public class Order {
 	public void setOrderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
-	public User getUser() {
-		return user;
+	public int getUserId() {
+		return userid;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(int userid) {
+		this.userid = userid;
 	}
 	public String getId() {
 		return id;

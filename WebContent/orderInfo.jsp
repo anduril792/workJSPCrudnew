@@ -10,7 +10,7 @@
 
 
 <body class="main">
-	<jsp:include page="header.jsp" />
+	<jsp:include page="head.jsp" />
 	<jsp:include page="menu_search.jsp" />
 
 	<div id="divpagecontent">

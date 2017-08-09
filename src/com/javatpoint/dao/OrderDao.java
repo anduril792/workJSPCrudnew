@@ -24,8 +24,7 @@ public class OrderDao {
 				"INSERT INTO orders VALUES(?,?,?,?,?,?,?,?)", order.getId(),
 				order.getMoney(), order.getReceiverAddress(), order
 						.getReceiverName(), order.getReceiverPhone(), order
-						.getPaystate(), order.getOrdertime(), order.getUser()
-						.getId());
+						.getPaystate(), order.getOrdertime(), order.getUserId());
 	}
 
 	// 根據用戶id查詢所有定單

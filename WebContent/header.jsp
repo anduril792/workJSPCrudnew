@@ -7,6 +7,7 @@
 <%
 	String name=user.getName();
 	User u=UserDao.getRecordByName(name);
+	request.getSession().setAttribute("user", user);
 %>
 <html>
 <head>

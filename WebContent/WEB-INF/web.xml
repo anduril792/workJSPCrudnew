@@ -52,4 +52,38 @@
 		<servlet-name>ChangeNumServlet</servlet-name>
 		<url-pattern>/changeNumServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+   		<servlet-name>FindOrderServlet</servlet-name>
+    		<servlet-class>com.javatpoint.servlet.FindOrderServlet</servlet-class>
+  	</servlet>
+	<servlet-mapping>
+    		<servlet-name>FindOrderServlet</servlet-name>
+    		<url-pattern>/servlet/findOrderServlet</url-pattern>
+  	</servlet-mapping>
+	<servlet>
+    		<servlet-name>FindOrderByUserId</servlet-name>
+    		<servlet-class>com.javatpoint.servlet.FindOrderByUserId</servlet-class>
+  	</servlet>
+	<servlet-mapping>
+    		<servlet-name>FindOrderByUserId</servlet-name>
+    		<url-pattern>/findOrderByUserId</url-pattern>
+  	</servlet-mapping>
+  	<servlet>
+    		<servlet-name>FindOrderItemsByOrderId</servlet-name>
+    		<servlet-class>com.javatpoint.servlet.FindOrderItemsByOrderId</servlet-class>
+  	</servlet>
+	<servlet-mapping>
+    		<servlet-name>FindOrderItemsByOrderId</servlet-name>
+    		<url-pattern>/findOrderItemsByOrderId</url-pattern>
+  	</servlet-mapping>
+	<servlet>
+    		<servlet-name>CreateOrderServlet</servlet-name>
+    		<servlet-class>com.javatpoint.servlet.CreateOrderServlet</servlet-class>
+  	</servlet>
+	<servlet-mapping>
+    		<servlet-name>CreateOrderServlet</servlet-name>
+    		<url-pattern>/createOrderServlet</url-pattern>
+  	</servlet-mapping>
+  	
+  	
 </web-app>

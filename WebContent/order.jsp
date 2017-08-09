@@ -1,6 +1,11 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.javatpoint.bean.*,com.javatpoint.dao.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="p" uri="http://www.itcast.cn/tag"%>
+<jsp:useBean id="user" class="com.javatpoint.bean.User" scope="session"></jsp:useBean>
+<jsp:setProperty property="*" name="user"/>
+<%
+	String name=user.getName();
+	User u=UserDao.getRecordByName(name);
+%>
 <html lang="zh-Hant">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -18,60 +23,55 @@
 			<a href="index.jsp">首頁</a>&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;購物車
 		</div>
 
-		<table class="table table-striped table-hover ">
-			<thead>
-				<tr>
-					<th>序號</th>
-					<th>商品名稱</th>
-					<th>價格</th>
-					<th>類別</th>
-					<th>數量</th>
-					<th>小計</th>
-				</tr>
-			</thead>
-			<c:set var="count" value="0"></c:set>
-			<c:forEach items="${cart }" var="p" varStatus="vs">
-				<tbody>
+		<form action="${pageContext.request.contextPath }/createOrderServlet"
+			method="post">
+			<table class="table table-striped table-hover ">
+				<thead>
 					<tr>
-						<td>${vs.count }</td>
-						<td>${p.key.name }</td>
-						<td>${p.key.price }</td>
-						<td>${p.key.category }</td>
-						<td><input name="text" type="text" value="${p.value }"
-							style="width:20px" readonly="readonly" /></td>
-						<td>${p.key.price*p.value }</td>
+						<th>序號</th>
+						<th>商品名稱</th>
+						<th>價格</th>
+						<th>類別</th>
+						<th>數量</th>
+						<th>小計</th>
 					</tr>
-				</tbody>
-				<c:set var="count" value="${count+p.key.price*p.value }"></c:set>
-			</c:forEach>
-		</table>
+				</thead>
+				<c:set var="count" value="0"></c:set>
+				<c:forEach items="${cart }" var="p" varStatus="vs">
+					<tbody>
+						<tr>
+							<td>${vs.count }</td>
+							<td>${p.key.name }</td>
+							<td>${p.key.price }</td>
+							<td>${p.key.category }</td>
+							<td><input name="text" type="text" value="${p.value }"
+								style="width:20px" readonly="readonly" /></td>
+							<td>${p.key.price*p.value }</td>
+						</tr>
+					</tbody>
+					<c:set var="count" value="${count+p.key.price*p.value }"></c:set>
+				</c:forEach>
+			</table>
 
-		<div style="text-align:right">
-			<font style="color:#FF0000">合計：&nbsp;&nbsp;${count }元</font> <input
-				type="hidden" name="money" value="${count }" />
-		</div>
+			<div style="text-align:right">
+				<font style="color:#FF0000">合計：&nbsp;&nbsp;${count }元</font> <input
+					type="hidden" name="money" value="${count }" />
+			</div>
 
-		<div class="form-group">
-			<label for="inputSmall" class="control-label">收貨地址：</label> <input
-				name="receiverAddress" type="text" 
-				class=" form-control input-sm " type="text" id="inputSmall" /><br />
-
-			<label class="control-label" for="inputSmall">收貨人：</label> <input
-				name="receiverName" type="text" 
-				class="form-control input-sm" type="text" id="inputSmall" /><br />
-
-			<label class="control-label" for="inputSmall">聯系方式：</label> <input
-				type="text" name="receiverPhone" 
-				class="form-control input-sm" type="text" id="inputSmall" />
-		</div>
-
+			<div>
+				<label for="inputSmall" class="control-label">收貨地址：</label> <input
+					name="receiverAddress" type="text" class=" form-control input-sm "
+					type="text" /><br /> <label class="control-label"
+					for="inputSmall">收貨人：</label> <input name="receiverName"
+					type="text" class="form-control input-sm" type="text" /><br /> <label
+					class="control-label" for="inputSmall">聯絡方式：</label> <input
+					type="text" name="receiverPhone" class="form-control input-sm"
+					type="text" /> <br /> 
+					<input type="hidden" value="<%=u.getId()%>" id="id" name="id"/>
+					<input type="submit" class="btn btn-success" value="提交訂單" style="float:right"/>
+			</div>
+		</form>
 	</div>
-
-	<script type="text/javascript">
-		function _submitOrder() {
-			document.getElementById("orderForm").submit();
-		}
-	</script>
 
 	<jsp:include page="foot.jsp" />
 	<script src="js/jquery-3.2.1.min.js"></script>
