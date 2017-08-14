@@ -27,7 +27,7 @@
 			<option>OTHER</option>
 </select>
 </p>
-<p>庫存 : <input type="text" name="qte" id="qte" ></p>
+<p>庫存 : <input type="text" name="pnum" id="pnum" ></p>
 <p>圖片 : <input type="file" name="file" id="file" ></p>
 <p>描述 : <input type="text" name="description" id="description" ></p>
 <p><input type="submit" value="上傳"></p>

@@ -228,4 +228,29 @@ public class UserDao
 		}
 		return result;
 	}
+	
+	public Boolean findName(String name)
+	{
+		Boolean result =false;
+		try
+		{
+			Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement("select name from register where name=?");
+			ps.setString(1, name);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				result = true; 
+			}
+			
+			ps.close();
+			con.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+		}
+		return result;
+	}
+	
 }

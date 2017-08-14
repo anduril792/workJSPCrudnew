@@ -50,13 +50,38 @@ function check()
 	return true;
 }
 
+	window.onload = function() {
+		var nameElement = document.getElementById("name");
+		nameElement.onblur = function() {
+			var val = this.value;
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4) {
+					if (xhr.status == 200) {
+						var msg = document.getElementById("msg");
+						if (val == "") {
+							msg.innerHTML = "<font color='red'>帳號不可空白</font>";
+						} else if (xhr.responseText == "true") {
+							msg.innerHTML = "<font color='red'>帳號已存在</font>";
+						} else {
+							msg.innerHTML = "可以使用";
+						}
+					}
+				}
+			}
+			xhr.open("get", "${pageContext.request.contextPath }/servlet/ckNameServlet?name=" + val);
+			xhr.send(null);
+		}
+
+}
+
 </script>
 <body>
 
 <h1>新增會員</h1>
 <form action="adduser.jsp" method="post" onsubmit="return check();" name="userform">
 <table>
-<tr><td>帳號:</td><td><input type="text" name="name" id="name"/></td></tr>
+<tr><td>帳號:</td><td><input type="text" name="name" id="name"/><span id="msg"></span></td></tr>
 <tr><td>密碼:</td><td><input type="password" name="password" id="pwd1"/></td></tr>
 <tr><td>確認密碼:</td><td><input type="password" name="password" id="pwd2"/></td></tr>
 <tr><td>電子郵件:</td><td><input type="email" name="email"/></td></tr>
