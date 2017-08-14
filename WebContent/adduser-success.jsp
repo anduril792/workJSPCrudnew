@@ -8,7 +8,9 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-<p>註冊成功。</p>
+<div class="alert alert-success" role="alert">
+  註冊成功。 <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+</div>
 <jsp:include page="userform.jsp"></jsp:include>
 
 </body>

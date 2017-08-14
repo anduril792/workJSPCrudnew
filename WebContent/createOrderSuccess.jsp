@@ -15,7 +15,6 @@
 <body class="main" onload="startSecond();">
 
 	<jsp:include page="header.jsp" />
-	<jsp:include page="menu_search.jsp" />
 	<div id="divcontent">
 		<table width="850px" border="0" cellspacing="0">
 			<tr>

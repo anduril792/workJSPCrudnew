@@ -67,9 +67,9 @@ public class OrderDaoForList
 		return status;
 	}
 	
-	public static List<Order> getAllOrder()
+	public static List<OrderForList> getAllOrder()
 	{
-		List<Order> list = new ArrayList<Order>();
+		List<OrderForList> list = new ArrayList<OrderForList>();
 
 		try
 		{
@@ -78,16 +78,7 @@ public class OrderDaoForList
 			ResultSet rs = ps.executeQuery();
 			while (rs.next())
 			{
-				Order o = new Order();
-				o.setId(rs.getString("id"));
-				o.setMoney(rs.getDouble("money"));
-				o.setReceiverAddress(rs.getString("receiverAddress"));
-				o.setReceiverName(rs.getString("receiverName"));
-				o.setReceiverPhone(rs.getString("receiverPhone"));
-				o.setPaystate(rs.getInt("paystate"));
-				o.setOrdertime(rs.getDate("ordertime"));
-				o.setUserId(rs.getInt("userid"));
-				list.add(o);
+				list.add(new OrderForList(rs.getString(1),rs.getDouble(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getDate(7),rs.getInt(8)));
 			}
 			rs.close();
 			ps.close();
@@ -100,6 +91,30 @@ public class OrderDaoForList
 		return list;
 	}
 
+	public static List<OrderForList> getAllOrderByUserId(int id)
+	{
+		List<OrderForList> list = new ArrayList<OrderForList>();
+		try
+		{
+			Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement("select * from orders where user_id=?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next())
+			{
+				list.add(new OrderForList(rs.getString(1),rs.getDouble(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getDate(7),rs.getInt(8)));
+			}
+			
+			ps.close();
+			con.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+		}
+		return list;
+	}
+	
 	public static OrderForList getOrderById(int id)
 	{
 		OrderForList o = null;
@@ -130,6 +145,8 @@ public class OrderDaoForList
 		}
 		return o;
 	}
+	
+	
 	
 	public static List<OrderForList> getAllOrderByPage(int page, int pagesize)
 	{
