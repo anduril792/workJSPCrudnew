@@ -1,121 +1,82 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.javatpoint.dao.*,com.javatpoint.bean.*,java.util.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<%
+		int pagenum = 0;
+		int pagesize = 0;
+		String strPage = "1";
+		if(request.getParameter("page") != null)
+		{
+			strPage = request.getParameter("page");
+		}
+		if(strPage.length() > 0 && strPage != null)
+		{
+			if(Integer.valueOf(strPage) == 1)
+			{
+				pagesize = Integer.valueOf(strPage) * 10;
+			}
+			else
+			{
+				pagenum = Integer.valueOf(strPage)*10-10;
+				pagesize = Integer.valueOf(strPage)*10-1;
+			}
+		}
+		List<OrderForList> list= OrderDaoForList.getAllOrderByPage(pagenum, pagesize);
+		request.setCharacterEncoding("UTF-8");
+		request.setAttribute("list",list);
+		
+		int TotalNum = OrderDaoForList.OrderSize();
+		int TotalPage = (int)Math.ceil(TotalNum / (double)10);
+%>
 <html>
 <head>
-<title>電子書城</title>
-<link rel="stylesheet" href="css/main.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>View Users</title>
 </head>
+<body>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">會員列表</div>
 
-<body class="main">
-	<jsp:include page="head.jsp" />
-	<jsp:include page="menu_search.jsp" />
-
-	<div id="divpagecontent">
-		<table width="100%" border="0" cellspacing="0">
-			<tr>
-				<td width="25%"><table width="100%" border="0" cellspacing="0"
-						style="margin-top:30px">
-						<tr>
-							<td class="listtitle">我的帳戶</td>
-						</tr>
-						<tr>
-							<td class="listtd"><img src="images/miniicon.gif" width="9"
-								height="6" />&nbsp;&nbsp;&nbsp;&nbsp; <a
-								href="modifyuserinfo.jsp">用戶信息修改</a>
-							</td>
-						</tr>
-
-						<tr>
-							<td class="listtd"><img src="images/miniicon.gif" width="9"
-								height="6" />&nbsp;&nbsp;&nbsp;&nbsp; <a href="orderlist.jsp">訂單查詢</a>
-							</td>
-						</tr>
-						<tr>
-							<td class="listtd"><img src="images/miniicon.gif" width="9"
-								height="6" />&nbsp;&nbsp;&nbsp;&nbsp; <a href="#">用戶退出</a></td>
-						</tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-					</table>
-				</td>
-				<td><div style="text-align:right; margin:5px 10px 5px 0px">
-						<a href="index.jsp">首頁</a>&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;<a
-							href="myAccount.jsp">&nbsp;我的帳戶</a>&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;訂單查詢
-					</div>
-
-
-					<table cellspacing="0" class="infocontent">
-						<tr>
-							<td style="padding:20px"><p>歡迎xxx光臨商城！</p>
-								<p>
-									您有<font style="color:#FF0000">${count }</font>個訂單
-								</p>
-								<table width="100%" border="0" cellspacing="0" class="tableopen">
-									<tr>
-										<td bgcolor="#A3E6DF" class="tableopentd01">訂單號</td>
-										<td bgcolor="#A3D7E6" class="tableopentd01">收件人</td>
-										<td bgcolor="#A3CCE6" class="tableopentd01">訂單時間</td>
-										<td bgcolor="#A3B6E6" class="tableopentd01">狀態</td>
-										<td bgcolor="#A3E2E6" class="tableopentd01">操作</td>
-									</tr>
-
-						<c:forEach items="${orders }" var="order" varStatus="vs">
-								
-									<tr>
-										<td class="tableopentd02">${vs.count }</td>
-
-										<td class="tableopentd02">${order.receiverName }</td>
-										<td class="tableopentd02">${order.ordertime }</td>
-										<td class="tableopentd02">${order.paystate==0? "未支付":"已支付"}</td>
-										<td class="tableopentd03"><a href="${pageContext.request.contextPath }/findOrderItemsByOrderId?orderid=${order.id}">查看</a>&nbsp;&nbsp;
-											<a href="#">刪除</a>
-										</td>
-									</tr>
-						</c:forEach>		
-								</table>
-							</td>
-						</tr>
-					</table></td>
-			</tr>
-		</table>
+  <!-- Table -->
+  <table class="table">
+    <tr><th>Id</th><th>金額</th><th>收貨人地址</th><th>收貨人姓名</th><th>收貨人電話</th><th>出貨狀態</th><th>訂購日期</th><th>客戶編號</th></tr>
+	<c:forEach items="${list}" var="o">
+	<tr><td>${o.getId()}</td><td>${o.getMoney()}</td><td>${o.getReceiverAddress()}</td><td>${o.getReceiverName()}</td><td>${o.getReceiverPhone()}</td><td>${o.getPaystate()}</td><td>${o.getOrdertime()}</td><td>${o.getUserId()}</td><td><a href="deleteorder.jsp?id=${o.getId()}">Delete</a></td></tr>
+	</c:forEach>
+  </table>
+</div>
+	<div align="center">
+	<form action="OrderListPage.jsp" id="pageform" method="get">
+		<select name="page" id="page" onchange="pageform.submit()">
+			<%
+				for(int i=1;i<=TotalPage;i++)
+				{
+					%>
+					<option value="<%=i%>" <%if(Integer.valueOf(strPage) == i) out.println("selected"); //當onchange="pageform.submit()"存在才有作用%>>第<%=i%>頁</option>
+					<% 
+				}
+			%>
+		</select>
+	</form>
 	</div>
-
-
-
-	<div id="divfoot">
-		<table width="100%" border="0" cellspacing="0">
-			<tr>
-				<td rowspan="2" style="width:10%"><img
-					src="images/bottomlogo.gif" width="195" height="50"
-					style="margin-left:175px" />
-				</td>
-				<td style="padding-top:5px; padding-left:50px"><a href="#"><font
-						color="#747556"><b>CONTACT US</b> </font> </a>
-				</td>
-			</tr>
-			<tr>
-				<td style="padding-left:50px"><font color="#CCCCCC"><b>COPYRIGHT
-							2008 &copy; eShop All Rights RESERVED.</b> </font>
-				</td>
-			</tr>
+	<div align="center">
+		<table>
+		<tr>
+		<%
+			for(int j=1;j<=TotalPage;j++)
+			{
+				%>
+					<td <%if(j == Integer.valueOf(strPage)){%>bgcolor="#FF3300"<%} %>><a href="OrderListPage.jsp?page=<%=j %>">&nbsp<%=j %>&nbsp</a></td>
+				<% 
+			}
+		%>
+		</tr>
 		</table>
+	
 	</div>
-
 
 </body>
 </html>
