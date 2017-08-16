@@ -19,9 +19,10 @@
 <%
 	String name = user.getName();
 	User u = UserDao.getRecordByName(name);
-	List<OrderForList> list = OrderDaoForList.getAllOrderByUserId(u.getId());
+	List<OrderItemForUser> list = OrderItemDaoForUser.getAllOrderItemByUserId(user.getId());
 	request.setCharacterEncoding("UTF-8");
 	request.setAttribute("list", list);
+	
 %>
 </head>
 <body>
@@ -53,9 +54,9 @@
 				<tr>
 					<th>ID</th>
 					<th>金額</th>
-					<th>收貨人地址</th>
-					<th>收貨人姓名</th>
-					<th>收貨人電話</th>
+					<th>產品名稱</th>
+					<th>圖片</th>
+					<th>訂購數量</th>
 					<th>出貨狀態</th>
 					<th>訂購日期</th>
 				</tr>
@@ -63,9 +64,9 @@
 					<tr>
 						<td>${o.getId()}</td>
 						<td>${o.getMoney()}</td>
-						<td>${o.getReceiverAddress()}</td>
-						<td>${o.getReceiverName()}</td>
-						<td>${o.getReceiverPhone()}</td>
+						<td>${o.getName()}</td>
+						<td>${o.getImg_url()}</td>
+						<td>${o.getBuynum()}</td>
 						<td>${o.getPaystate()}</td>
 						<td>${o.getOrdertime()}</td>
 					</tr>
