@@ -65,7 +65,7 @@
 						<td>${o.getId()}</td>
 						<td>${o.getMoney()}</td>
 						<td>${o.getName()}</td>
-						<td>${o.getImg_url()}</td>
+						<td><img src="${o.getImg_url()}"></td>
 						<td>${o.getBuynum()}</td>
 						<td>${o.getPaystate()}</td>
 						<td>${o.getOrdertime()}</td>
