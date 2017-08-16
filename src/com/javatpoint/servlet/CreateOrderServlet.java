@@ -24,7 +24,7 @@ public class CreateOrderServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		request.setCharacterEncoding("UTF-8");
 		Order order = new Order();
 		try {
 			BeanUtils.populate(order, request.getParameterMap());
@@ -33,18 +33,17 @@ public class CreateOrderServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//2、獲取session對象中的購物車數據
+		
 		Map<Product, String> cart = (Map<Product, String>) request.getSession().getAttribute("cart");
 		
-		//3、遍曆購物車中的數據，添加到orderItem對象中，同時把多個orderItem添加到list集合中
 		List<OrderItem> list = new ArrayList<OrderItem>();
 		for (Product p : cart.keySet()) {
 			OrderItem oi = new OrderItem();
-			oi.setOrder(order);//把Order對象添加到OrderItem中
-			oi.setP(p);   //把購物車中的商品對象添加到OrderItem中
-			oi.setBuynum(Integer.parseInt(cart.get(p)));//購物車中的商品數量
+			oi.setOrder(order);
+			oi.setP(p);
+			oi.setBuynum(Integer.parseInt(cart.get(p)));
 			
-			list.add(oi);//把每個定單項添加到集合中
+			list.add(oi);
 		}
 		
 		order.setOrderItems(list);

@@ -1,76 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.javatpoint.dao.*,com.javatpoint.bean.*"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="UTF-8"
+	import="com.javatpoint.dao.*,com.javatpoint.bean.*"%>
 <jsp:useBean id="user" class="com.javatpoint.bean.User" scope="session"></jsp:useBean>
-<jsp:setProperty property="*" name="user"/>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:setProperty property="*" name="user" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	String name=user.getName();
-	User u=UserDao.getRecordByName(name);
+	String name = user.getName();
+	User u = UserDao.getRecordByName(name);
 	request.getSession().setAttribute("user", user);
 %>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Soar Like an Eagl</title>
-<!-- <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-<nav class="navbar navbar-inverse">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Soar Like an Eagle</a>
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li class="index.jsp"><a href="index.jsp">首頁</a></li>
-					<li><a href="login.jsp">會員登入</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">商品種類 <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="${pageContext.request.contextPath}/pageServlet?category=BOSTON">BOSTON</a></li>
-							<li><a href="${pageContext.request.contextPath}/pageServlet?category=TOTE">TOTE</a></li>
-							<li class="divider"></li>
-							<li><a href="#">MESSENGER</a></li>
-							<li><a href="#">SHOULDER</a></li>
-							<li><a href="#">WAIST</a></li>
-							<li class="divider"></li>
-							<li><a href="#">OTHER</a></li>
-						</ul></li>
-					<li><a href="promotion.jsp">好物推薦</a></li>
-					<li><a href="contact.jsp">聯絡我們</a></li>
-					<li><a href="shoppingcart.jsp">購物車</a></li>
-					<li><a href="manager.jsp">後臺管理</a></li>
-				</ul>
-				<form class="navbar-form navbar-left" role="search">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                      </div>
-                      <button type="submit" class="btn btn-default">搜尋</button>
-                      <c:if test="${user.isValid() }" >
-                      <div>
-                      	<span>帳號: <%=user.getName() %></span>
-                      	<span>密碼: <%=user.getPassword() %></span>
-                      	<span>ID : <%=u.getId()%></span>
-                      	<span><a href="account.jsp">會員帳號</a></span>
-                      	<span><a href="logout.jsp">登出</a></span>
-                      </div>
-                      </c:if>
-                    </form>
-			</div>
+<nav class="navbar navbar-inverse ">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.jsp">Soar Like an Eagle</a>
 		</div>
-	</nav>
-		<!--  <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><script>-->
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-</body>
-</html>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false">商品種類 <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a
+							href="${pageContext.request.contextPath}/pageServlet?category=BOSTON">BOSTON</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/pageServlet?category=TOTE">TOTE</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/pageServlet?category=MESSENGER">MESSENGER</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/pageServlet?category=SHOULDER">SHOULDER</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/pageServlet?category=WAIST">WAIST</a></li>
+					</ul></li>
+				<li><a href="contact.jsp">聯絡我們</a></li>				
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false">後臺管理<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a
+							href="viewusers.jsp">會員管理</a></li>
+						<li><a
+							href="ArticleListPage.jsp">商品管理</a></li>
+						<li><a
+							href="OrderListPage.jsp">訂單管理</a></li>
+						<li><a
+							href="MsgListPage.jsp">訊息管理</a></li>
+					</ul></li>
+			</ul>
+			<c:if test="${!user.isValid() }">
+				<span style="float:right;line-height:60px"><a
+					href="login.jsp" style="color:white">會員登入</a></span>
+			</c:if>
+			<c:if test="${user.isValid() }">
+				<div style="float:right;line-height:60px">
+					<span><a href="account.jsp" style="color:white">我的帳號</a></span>&nbsp;&nbsp;
+					<span><a href="cart.jsp" style="color:white">購物車</a></span>&nbsp;&nbsp;
+					<span><a href="logout.jsp" style="color:white"
+						onclick="return confirm('確認登出?')">登出</a></span>
+				</div>
+			</c:if>
+		</div>
+	</div>
+</nav>

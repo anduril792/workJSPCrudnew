@@ -16,29 +16,23 @@ public class PageServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//導航按鈕的查詢條件
 		String category = request.getParameter("category");
 		if(category==null){
 			category="";
 		}
-		//初始化每頁顯示的記錄數
 		int pageSize = 6;
 		
-		int currentPage = 1;//當前頁
-		String currPage = request.getParameter("currentPage");//從上一頁或下一頁得到的數據
-		if(currPage!=null&&!"".equals(currPage)){//第一次訪問資源時，currPage可能是null
+		int currentPage = 1;
+		String currPage = request.getParameter("currentPage");
+		if(currPage!=null&&!"".equals(currPage)){
 			currentPage = Integer.parseInt(currPage);
 		}
 		
 		ProductService bs = new ProductService();
-		//分頁查詢，并返回PageBean對象
+		
 		PageBean pb = bs.findBooksPage(currentPage,pageSize,category);
 		List<Product> list =bs.findAllBooks();
 		
-		/*if(list!=null){
-		request.setAttribute("products", list);
-		request.getRequestDispatcher("/admin/products/list.jsp").forward(request, response); 
-		}*/
 		request.setAttribute("pb", pb);
 		request.getRequestDispatcher("/product_list.jsp").forward(request, response);
 	}

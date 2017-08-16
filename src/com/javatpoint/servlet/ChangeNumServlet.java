@@ -17,17 +17,17 @@ public class ChangeNumServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
 		String num = request.getParameter("num");
-		//注：只能重写id的hashcode
+		
 		Product b = new Product();
 		b.setId(id);
 		
 		HttpSession session = request.getSession();
 		Map<Product, String> cart = (Map<Product, String>) session.getAttribute("cart");
-		//如果商品数据为0，就删除对象
+		
 		if("0".equals(num)){
 			cart.remove(b);
 		}
-		//判断如果找到与id相同的书，
+		
 		if(cart.containsKey(b)){
 			cart.put(b, num);
 		}

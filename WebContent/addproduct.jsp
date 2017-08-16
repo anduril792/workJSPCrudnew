@@ -3,8 +3,8 @@
 <jsp:useBean id="a" class="com.javatpoint.bean.Article" scope="session"></jsp:useBean>
 <jsp:setProperty property="*" name="a" />
 <%
-	MultipartRequest multi = new MultipartRequest(request, "C:/Users/T450/eclipse-workspace/JSPCrud/WebContent/images");
-	String fname ="images/"+ multi.getFilesystemName("file");
+	MultipartRequest multi = new MultipartRequest(request, "C:/Users/Rafa/Workspaces/MyEclipse 2016/JSPCrud/WebContent/images");
+    String fname ="images/"+ multi.getFilesystemName("file");
 	String id = multi.getParameter("id");
 	String name = new String(multi.getParameter("name").getBytes("ISO-8859-1"), "UTF-8");
 	String description = new String(multi.getParameter("description").getBytes("ISO-8859-1"), "UTF-8");

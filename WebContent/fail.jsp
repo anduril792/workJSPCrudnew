@@ -1,19 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<jsp:useBean id="user" class="com.javatpoint.bean.User" scope="session"></jsp:useBean>
-<jsp:setProperty property="*" name="user"/>
+	pageEncoding="UTF-8"%>
+<jsp:setProperty property="*" name="user" />
 <%
-    request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
 %>
-<html>
+<!DOCTYPE html>
+<html lang="zh-Hant">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Soar Like an Eagle 販售各式包包">
+<meta name="keywords" content="Soar Like an Eagle 波士頓包 郵差包 腰包 肩背包 托特包">
+<title>Soar Like an Eagle</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-<jsp:include page="header.jsp" />
-登入失敗。
-
+	<%@include file="header.jsp"%>
+	<div class="container" style="margin-top:50px">
+		<div class="row">
+			<div class="col-lg-4 col-lg-offset-4">
+				<div class="panel panel-danger">
+					<div class="panel-heading">
+						<h3 class="panel-title">登入失敗！</h3>
+					</div>
+					<div class="panel-body">
+						<p>帳號或密碼有誤！</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<jsp:include page="foot.jsp" />
 </body>
 </html>

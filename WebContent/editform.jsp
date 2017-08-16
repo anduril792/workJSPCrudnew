@@ -1,44 +1,95 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@page import="com.javatpoint.dao.UserDao,com.javatpoint.bean.User"%>
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Edit Form</title>
 </head>
 <body>
-<%@page import="com.javatpoint.dao.UserDao,com.javatpoint.bean.User"%>
 
-<%
-String id=request.getParameter("id");
-User u=UserDao.getRecordById(Integer.parseInt(id));
+	<%
+		String id = request.getParameter("id");
+		User u = UserDao.getRecordById(Integer.parseInt(id));
 
-String sex = u.getSex();
-request.setAttribute("s", sex);
+		String sex = u.getSex();
+		request.setAttribute("s", sex);
 
-String country = u.getCountry();
-request.setAttribute("c", country);
-%>
+		String country = u.getCountry();
+		request.setAttribute("c", country);
+	%>
 
-<h1>會員修改</h1>
-<form action="edituser.jsp" method="post">
-<input type="hidden" name="id" value="<%=u.getId() %>"/>
-<table>
-<tr><td>姓名 :</td><td><input type="text" name="name" value="<%= u.getName()%>"/></td></tr>
-<tr><td>密碼 :</td><td><input type="password" name="password" value="<%= u.getPassword()%>"/></td></tr>
-<tr><td>電子郵件 :</td><td><input type="email" name="email" value="<%= u.getEmail()%>"/></td></tr>
-<tr><td>性別 :</td><td><input type="radio" name="sex" value="male" ${s=="male"? "checked='checked'":"" } />Male <input type="radio" name="sex" value="female" ${s=="female"? "checked='checked'":"" }/>Female </td></tr>
-<tr><td>城市 :</td><td>
-<select name="country">
-<option ${c=="India"? "selected":"" }>India</option>
-			<option ${c=="Pakistan"? "selected":"" }>Pakistan</option>
-			<option ${c=="Afghanistan"? "selected":"" }>Afghanistan</option>
-			<option ${c=="Berma"? "selected":"" }>Berma</option>
-			<option ${c=="Other"? "selected":"" }>Other</option>
-</select>
-</td></tr>
-<tr><td colspan="2"><input type="submit" value="修改"/></td></tr>
-</table>
-</form>
-
+	<div class="container">
+		<div class="row ">
+			<div class="col-lg-6 col-lg-offset-3 well bs-component">
+				<form action="edituser.jsp" method="post" onsubmit="return check();"
+					name="userform" class="form-horizontal">
+					<input type="hidden" name="id" value="<%=u.getId()%>" />
+					<fieldset>
+						<legend style="text-align:center">會員資料修改</legend>
+						<div class="form-group">
+							<label for="inputAccount" class="col-lg-3 control-label">帳號</label>
+							<div class="col-lg-9">
+								<input type="text" class="form-control" id="name" name="name"
+									placeholder="Name" value="<%=u.getName()%>"><span
+									id="msg"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputPassword" class="col-lg-3 control-label">密碼</label>
+							<div class="col-lg-9">
+								<input type="password" class="form-control" id="pwd1"
+									name="password" placeholder="Password"
+									value="<%=u.getPassword()%>">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputRepassword" class="col-lg-3 control-label">密碼確認</label>
+							<div class="col-lg-9">
+								<input type="password" class="form-control" id="pwd2"
+									name="repassword" placeholder="Password"
+									value="<%=u.getPassword()%>">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputEmail" class="col-lg-3 control-label">電子信箱</label>
+							<div class="col-lg-9">
+								<input type="email" class="form-control" id="email" name="email"
+									placeholder="Email" value="<%=u.getEmail()%>">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputSex" class="col-lg-3 control-label">性別</label>
+							<div class="col-lg-9">
+								<input type="radio" name="sex" id="msex" value="male"
+									${s=="male"? "checked='checked'":"" } /> 男 <input
+									type="radio" name="sex" id="fsex" value="female"
+									${s=="female"? "checked='checked'":"" } /> 女
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputCountry" class="col-lg-3 control-label">居住地區</label>
+							<div class="col-lg-9">
+								<select name="country" style="width:155px" class="form-control">
+									<option value="Taipei" ${c=="Taipei"? "selected":"" }>台北</option>
+									<option value="Taichung" ${c=="Taichung"? "selected":"" }>台中</option>
+									<option value="Tainan" ${c=="Tainan"? "selected":"" }>台南</option>
+									<option value="Kaohsiung" ${c=="Kaohsiung"? "selected":"" }>高雄</option>
+									<option value="Other" ${c=="Other"? "selected":"" }>其他</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-10 col-lg-offset-2" style="text-align:right">
+								<input type="submit" value="修改" class="btn btn-primary" />
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+	<jsp:include page="foot.jsp" />
 </body>
 </html>

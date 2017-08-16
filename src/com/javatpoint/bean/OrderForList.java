@@ -18,17 +18,6 @@ public class OrderForList
 		
 	}
 	
-	public OrderForList(String id,double money,String receiverAddress,String receiverName,String receiverPhone,int paystate,Date ordertime)
-	{
-		this.id = id;
-		this.money = money;
-		this.receiverAddress = receiverAddress;
-		this.receiverName = receiverName;
-		this.receiverPhone = receiverPhone;
-		this.paystate = paystate;
-		this.ordertime = ordertime;
-	}
-	
 	public OrderForList(String id,double money,String receiverAddress,String receiverName,String receiverPhone,int paystate,Date ordertime,int userid)
 	{
 		this.id = id;

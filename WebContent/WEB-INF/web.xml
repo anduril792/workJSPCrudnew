@@ -5,6 +5,15 @@
 	version="2.5">
 	
 	<servlet>
+		<servlet-name>CkNameServlet</servlet-name>
+		<servlet-class>com.javatpoint.servlet.CkNameServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CkNameServlet</servlet-name>
+		<url-pattern>/servlet/ckNameServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>FindArticleByIdServlet</servlet-name>
 		<servlet-class>com.javatpoint.servlet.FindArticleByIdServlet</servlet-class>
 	</servlet>
@@ -86,23 +95,4 @@
   	</servlet-mapping>
   	
   	
-	
-
-<servlet>
-	<servlet-name>CkNameServlet</servlet-name>
-    		
-	<servlet-class>com.javatpoint.servlet.CkNameServlet</servlet-class>
-  	
-</servlet>
-	
-<servlet-mapping>
-    		
-	<servlet-name>CkNameServlet</servlet-name>
-    
-	<url-pattern>/servlet/ckNameServlet</url-pattern>
-  	
-</servlet-mapping>
-  	
-
-
 </web-app>

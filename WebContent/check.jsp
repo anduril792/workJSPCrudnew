@@ -5,11 +5,12 @@
 <jsp:setProperty property="*" name="user"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+    
     request.setCharacterEncoding("UTF-8");
 	request.getSession().setAttribute("user", user);
 %>
 <c:if test="${user.isValid()}">
-<c:redirect url="index.jsp"></c:redirect>
+<c:redirect url="loginSuccess.jsp"></c:redirect>
 </c:if>
 <c:if test="${not user.isValid()}">
 <c:redirect url="fail.jsp"></c:redirect>

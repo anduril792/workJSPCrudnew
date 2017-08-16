@@ -9,7 +9,7 @@
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 <%
-	session.removeAttribute("user");
+	request.getSession().invalidate();
 	response.sendRedirect("index.jsp");
 %>
 </body>

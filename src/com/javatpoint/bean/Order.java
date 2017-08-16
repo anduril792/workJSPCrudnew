@@ -4,15 +4,15 @@ import java.util.Date;
 import java.util.List;
 
 public class Order {
-	private String id; // 訂單編號
-	private double money; // 訂單總價
-	private String receiverAddress; // 送貨地址
-	private String receiverName; // 收貨人姓名
-	private String receiverPhone; // 收貨人電話
-	private int paystate; // 訂單狀態
-	private Date ordertime; // 下單時間
+	private String id; 
+	private double money; 
+	private String receiverAddress; 
+	private String receiverName; 
+	private String receiverPhone; 
+	private int paystate; 
+	private Date ordertime; 
 	private int userid;
-	private List<OrderItem> orderItems;//表示一個order對象，對應多個orderitem
+	private List<OrderItem> orderItems;
 	
 	public List<OrderItem> getOrderItems() {
 		return orderItems;
