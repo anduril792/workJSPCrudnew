@@ -69,7 +69,7 @@
 					onsubmit="return check();" name="userform" class="form-horizontal">
 					<fieldset>
 						<legend style="text-align:center">會員資料修改</legend>
-						<input type="hidden" name="id" value="<%=u.getId()%>" />
+						<input type="hidden" name="id" value="<%=user.getId()%>" />
 						<div class="form-group">
 							<label for="inputAccount" class="col-lg-3 control-label">帳號</label>
 							<div class="col-lg-9">

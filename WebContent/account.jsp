@@ -45,7 +45,7 @@
 					<td><%=u.getCountry()%></td>
 			</table>
 		</div>
-		<a href="UserEditForm.jsp?id=<%=u.getId()%>">修改資料</a>
+		<a href="UserEditForm.jsp">修改資料</a>
 		<hr />
 		<div class="panel panel-default">
 			<div class="panel-heading">購買紀錄</div>

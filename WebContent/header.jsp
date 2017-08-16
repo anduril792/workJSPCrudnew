@@ -7,7 +7,9 @@
 <%
 	String name = user.getName();
 	User u = UserDao.getRecordByName(name);
-	request.getSession().setAttribute("user", user);
+	request.getSession().setAttribute("user", u);
+
+	
 %>
 <nav class="navbar navbar-inverse ">
 	<div class="container">
@@ -37,7 +39,8 @@
 						<li><a
 							href="${pageContext.request.contextPath}/pageServlet?category=WAIST">WAIST</a></li>
 					</ul></li>
-				<li><a href="contact.jsp">聯絡我們</a></li>				
+				<li><a href="contact.jsp">聯絡我們</a></li>
+			<c:if test="${user.isValid() }">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">後臺管理<span class="caret"></span></a>
@@ -51,6 +54,7 @@
 						<li><a
 							href="MsgListPage.jsp">訊息管理</a></li>
 					</ul></li>
+			</c:if>
 			</ul>
 			<c:if test="${!user.isValid() }">
 				<span style="float:right;line-height:60px"><a
