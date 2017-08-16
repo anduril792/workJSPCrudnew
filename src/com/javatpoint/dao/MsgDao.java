@@ -125,4 +125,25 @@ public class MsgDao
 		}
 		return m;
 	}
+	
+	public static int MsgSize()
+	{
+		int result = 0;
+		try
+		{
+			Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement("select count(*) from msg");
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			result = rs.getInt(1);
+			rs.close();
+			ps.close();
+			con.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+		}
+		return result;
+	}
 }

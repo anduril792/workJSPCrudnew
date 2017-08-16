@@ -15,9 +15,28 @@
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <%
+
+	int pagenum = 0;
+	int pagesize = 0;
+	String strPage = "1";
+	if (request.getParameter("page") != null) {
+		strPage = request.getParameter("page");
+	}
+	if (strPage.length() > 0 && strPage != null) {
+		if (Integer.valueOf(strPage) == 1) {
+			pagesize = Integer.valueOf(strPage) * 10;
+		} else {
+			pagenum = Integer.valueOf(strPage) * 10 - 10;
+			pagesize = Integer.valueOf(strPage) * 10 - 1;
+		}
+	}
+	
 	List<Msg> list = MsgDao.getAllMsg();
 	request.setCharacterEncoding("UTF-8");
 	request.setAttribute("list", list);
+	
+	int TotalNum = MsgDao.MsgSize();
+	int TotalPage = (int) Math.ceil(TotalNum / (double) 10);
 %>
 </head>
 <body>
@@ -28,6 +47,22 @@
 			後臺管理</a>&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;訊息列表
 		</div>
 		<h3>訊息列表</h3>
+		<div align="right">
+			<form action="OrderListPage.jsp" id="pageform" method="get">
+				<select name="page" id="page" onchange="pageform.submit()">
+					<%
+						for (int i = 1; i <= TotalPage; i++) {
+					%>
+					<option value="<%=i%>"
+						<%if (Integer.valueOf(strPage) == i)
+					out.println("selected"); //當onchange="pageform.submit()"存在才有作用%>>第<%=i%>頁
+					</option>
+					<%
+						}
+					%>
+				</select>
+			</form>
+		</div>
 		<table class="table table-striped table-hover ">
 			<thead>
 				<tr>
@@ -53,6 +88,19 @@
 				</c:forEach>
 			</tbody>
 		</table>
+	</div>
+	<div align="center">
+		<ul class="pagination pagination-sm">
+			<%
+				for (int j = 1; j <= TotalPage; j++) {
+			%>
+			<li <%if (j == Integer.valueOf(strPage)) {%> <%}%>><a
+				href="MsgListPage.jsp?page=<%=j%>">&nbsp<%=j%>&nbsp
+			</a></li>
+			<%
+				}
+			%>
+		</ul>
 	</div>
 	<jsp:include page="foot.jsp" />
 </body>
