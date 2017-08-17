@@ -7,7 +7,10 @@
 <%
 	String name = user.getName();
 	User u = UserDao.getRecordByName(name);
+	if(user.isValid())
+	{
 	request.getSession().setAttribute("user", u);
+	}
 
 	
 %>
@@ -56,7 +59,7 @@
 					</ul></li>
 			</c:if>
 			</ul>
-			<c:if test="${!user.isValid() }">
+			<c:if test="${not user.isValid() }">
 				<span style="float:right;line-height:60px"><a
 					href="login.jsp" style="color:white">會員登入</a></span>
 			</c:if>
