@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<jsp:useBean id="user" class="com.javatpoint.bean.User" scope="session"></jsp:useBean>
+<jsp:setProperty property="*" name="user" />
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -26,17 +28,17 @@
 					<fieldset>
 						<legend style="text-align:center">聯絡我們</legend>
 						<div class="form-group">
-							<label for="inputAccount" class="col-lg-3 control-label">姓名</label>
+							<label for="inputAccount" class="col-lg-3 control-label" >姓名</label>
 							<div class="col-lg-9">
 								<input type="text" class="form-control" id="name" name="name"
-									placeholder="Name" required><span id="msg"  ></span>
+									placeholder="Name" <%if(user.isValid()){ %>value="${user.getName()}"<%} %> required><span id="msg"  ></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputEmailt" class="col-lg-3 control-label">電子信箱</label>
 							<div class="col-lg-9">
 								<input type="email" class="form-control" id="email" name="email"
-									placeholder="Email">
+									placeholder="Email" <%if(user.isValid()){ %>value="${user.getEmail()}"<%} %>>
 							</div>
 						</div>
 						<div class="form-group">

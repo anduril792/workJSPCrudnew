@@ -1,4 +1,5 @@
-<%@page	import="com.javatpoint.dao.UserDao,com.javatpoint.bean.*,java.util.*"%>
+<%@page
+	import="com.javatpoint.dao.UserDao,com.javatpoint.bean.*,java.util.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -64,7 +65,7 @@
 		<table class="table table-striped table-hover ">
 			<thead>
 				<tr>
-					<th>ID</th>
+					<th>會員編號</th>
 					<th>姓名</th>
 					<th>密碼</th>
 					<th>電子郵件</th>
@@ -83,9 +84,11 @@
 						<td>${u.getEmail()}</td>
 						<td>${u.getSex()}</td>
 						<td>${u.getCountry()}</td>
-						<td><a href="EditUserPage.jsp?id=${u.getId()}">Edit</a></td>
+						<td><a href="EditUserPage.jsp?id=${u.getId()}"><span
+								class="glyphicon glyphicon-pencil" aria-hidden="true"></a></td>
 						<td><a href="deleteuser.jsp?id=${u.getId()}"
-							onclick="return confirm('確認刪除?')">Delete</a></td>
+							onclick="return confirm('確認刪除?')"><span
+								class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

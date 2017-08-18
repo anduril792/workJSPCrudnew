@@ -18,6 +18,7 @@ public class CkNameServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		UserDao userdao = new UserDao();
 		Boolean b =userdao.findName(name);
+		
 			out.print(b);
 	}
 

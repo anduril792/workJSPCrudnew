@@ -66,7 +66,7 @@
 		<table class="table table-striped table-hover ">
 			<thead>
 				<tr>
-					<th>ID</th>
+					<th>訊息編號</th>
 					<th>姓名</th>
 					<th>電子郵件</th>
 					<th>主旨</th>
@@ -83,7 +83,8 @@
 						<td>${m.getMsgSub()}</td>
 						<td>${m.getMessage()}</td>
 						<td><a href="delMsg.jsp?idMsg=${m.getIdMsg()}"
-							onclick="return confirm('確認刪除?')">刪除</a></td>
+							onclick="return confirm('確認刪除?')"><span
+								class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-	import="com.javatpoint.dao.*,com.javatpoint.bean.*,java.util.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" import="com.javatpoint.dao.*,com.javatpoint.bean.*,java.util.*"%>
 <jsp:useBean id="user" class="com.javatpoint.bean.User" scope="session"></jsp:useBean>
 <jsp:setProperty property="*" name="user" />
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -19,7 +17,7 @@
 <%
 	String name = user.getName();
 	User u = UserDao.getRecordByName(name);
-	List<OrderItemForUser> list = OrderItemDaoForUser.getAllOrderItemByUserId(user.getId());
+	List<OrderForList> list = OrderDaoForList.getAllOrderByUserId(user.getId());
 	request.setCharacterEncoding("UTF-8");
 	request.setAttribute("list", list);
 	
@@ -52,22 +50,14 @@
 			<div class="panel-heading">購買紀錄</div>
 			<table class="table">
 				<tr>
-					<th>ID</th>
-					<th>金額</th>
-					<th>產品名稱</th>
-					<th>圖片</th>
-					<th>訂購數量</th>
+					<th>訂單編號</th>
 					<th>出貨狀態</th>
 					<th>訂購日期</th>
 				</tr>
 				<c:forEach items="${list}" var="o">
 					<tr>
-						<td>${o.getId()}</td>
-						<td>${o.getMoney()}</td>
-						<td>${o.getName()}</td>
-						<td><img src="${o.getImg_url()}"></td>
-						<td>${o.getBuynum()}</td>
-						<td>${o.getPaystate()}</td>
+						<td><a href="OrderItemList.jsp?oid=${o.getId()}">${o.getId()}</a></td>
+						<td>${0==o.getPaystate()?"<span style='color:red'>尚未出貨</span>":"<span style='color:blue'>已經出貨</span>"}</td>
 						<td>${o.getOrdertime()}</td>
 					</tr>
 				</c:forEach>

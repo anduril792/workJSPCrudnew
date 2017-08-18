@@ -1,7 +1,6 @@
 package com.javatpoint.servlet;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -11,13 +10,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.javatpoint.bean.Order;
 import com.javatpoint.bean.OrderItem;
 import com.javatpoint.bean.Product;
-import com.javatpoint.bean.User;
 import com.javatpoint.service.OrderService;
 
 public class CreateOrderServlet extends HttpServlet {
@@ -51,8 +49,9 @@ public class CreateOrderServlet extends HttpServlet {
 		OrderService os = new OrderService();
 		os.addOrder(order);
 		
-		//
-		request.getSession().invalidate();
+		//request.getSession().invalidate();
+		request.getSession().removeAttribute("cart");
+		
 		request.getRequestDispatcher("/paysuccess.jsp").forward(request, response);
 	}
 

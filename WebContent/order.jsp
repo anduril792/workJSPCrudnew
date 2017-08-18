@@ -56,8 +56,8 @@
 				</c:forEach>
 			</table>
 
-			<div style="text-align:right">
-				<font style="color:#FF0000">合計：&nbsp;&nbsp;${count }元</font> <input
+			<div style="text-align:right; padding-right:40px;">
+				<font style="color:#FF6600;font-weight:bold">合計：&nbsp;&nbsp;${count }元</font> <input
 					type="hidden" name="money" value="${count }" />
 			</div>
 

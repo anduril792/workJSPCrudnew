@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -16,7 +16,8 @@
 <body>
 	<jsp:include page="header.jsp" />
 	<div class="container">
-<p>刪除成功。</p></div>
-<jsp:include page="ArticleList.jsp"></jsp:include>
+		<p>刪除成功。</p>
+	</div>
+	<jsp:include page="ArticleList.jsp"></jsp:include>
 </body>
 </html>

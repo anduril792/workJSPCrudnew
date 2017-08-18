@@ -2,32 +2,75 @@
 	pageEncoding="UTF-8"%>
 <%@page import="com.javatpoint.dao.UserDao,com.javatpoint.bean.User"%>
 <!DOCTYPE html>
+<%
+	String id = request.getParameter("id");
+	User u = UserDao.getRecordById(Integer.parseInt(id));
+
+	String sex = u.getSex();
+	request.setAttribute("s", sex);
+
+	String country = u.getCountry();
+	request.setAttribute("c", country);
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Edit Form</title>
+<script type="text/javascript">
+	function check() {
+		var name = document.getElementById("name");
+		var msex = document.getElementById("msex").checked;
+		var fsex = document.getElementById("fsex").checked;
+		var pwd1 = document.getElementById("pwd1");
+		var pwd2 = document.getElementById("pwd2");
+		var email = document.getElementById("email");
+		
+		
+		if(""==name.value){
+			alert("帳號不可空白");
+			return false;
+		}else if(!/^[a-zA-Z]{4,8}$/.test(name.value)){
+			alert("帳號需為4~8位英文字母");
+			return false;
+		}
+		
+		if(""==pwd1.value){
+			alert("密碼不可空白");
+			return false;
+		}else if(!/^[a-zA-Z0-9]{4,8}$/.test(pwd1.value)){
+			alert("密碼需為4~8位英文字母或數字");
+			return false;
+		}
+		
+		if(pwd1.value!=pwd2.value){
+			alert("兩次密碼輸入不一致");
+			return false;
+		}	
+			
+		if (msex == false && fsex == false) {
+				alert("未選擇性別。");
+				return false;			
+		}
+		
+		if(!/^[^\s]+@[^\s]+\.[^\s]{2,3}$/.test(email.value)){
+			alert("email格式不正確");
+			return false;		
+		}
+
+		return true;
+	}
+</script>
 </head>
 <body>
-
-	<%
-		String id = request.getParameter("id");
-		User u = UserDao.getRecordById(Integer.parseInt(id));
-
-		String sex = u.getSex();
-		request.setAttribute("s", sex);
-
-		String country = u.getCountry();
-		request.setAttribute("c", country);
-	%>
-
 	<div class="container">
+	<br/>
 		<div class="row ">
 			<div class="col-lg-6 col-lg-offset-3 well bs-component">
 				<form action="edituser.jsp" method="post" onsubmit="return check();"
 					name="userform" class="form-horizontal">
 					<input type="hidden" name="id" value="<%=u.getId()%>" />
 					<fieldset>
-						<legend style="text-align:center">會員資料修改</legend>
+						<legend style="text-align:center">修改會員資料</legend>
 						<div class="form-group">
 							<label for="inputAccount" class="col-lg-3 control-label">帳號</label>
 							<div class="col-lg-9">
@@ -63,8 +106,8 @@
 							<label for="inputSex" class="col-lg-3 control-label">性別</label>
 							<div class="col-lg-9">
 								<input type="radio" name="sex" id="msex" value="male"
-									${s=="male"? "checked='checked'":"" } /> 男 <input
-									type="radio" name="sex" id="fsex" value="female"
+									${s=="male"? "checked='checked'":"" } /> 男 <input type="radio"
+									name="sex" id="fsex" value="female"
 									${s=="female"? "checked='checked'":"" } /> 女
 							</div>
 						</div>

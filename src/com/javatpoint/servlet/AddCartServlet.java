@@ -35,7 +35,11 @@ public class AddCartServlet extends HttpServlet {
 			
 		}
 		if(cart.containsKey(b)){
+			if(b.getPnum()>Integer.parseInt(cart.get(b))){
 			num=Integer.parseInt(cart.get(b))+1;
+			}else{
+				num=Integer.parseInt(cart.get(b));
+			}
 		}
 		cart.put(b, num+"");
 		

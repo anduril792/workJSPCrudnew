@@ -54,4 +54,30 @@ public class OrderItemDaoForUser
 		}
 		return list;
 	}
+	
+	public static List<OrderItemForUser> getAllOrderItemByOrderId(String id)
+	{
+		List<OrderItemForUser> list = new ArrayList<OrderItemForUser>();
+		try
+		{
+			Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement("SELECT * from orderitem INNER JOIN products on orderitem.product_id=products.id INNER JOIN orders ON orderitem.order_id=orders.id where orderitem.order_id=?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next())
+			{
+				list.add(new OrderItemForUser(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7),rs.getInt(8),
+											rs.getString(9),rs.getString(10),rs.getString(11),rs.getDouble(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getInt(16),
+											rs.getDate(17),rs.getInt(18)));
+			}
+			
+			ps.close();
+			con.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+		}
+		return list;
+	}
 }

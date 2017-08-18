@@ -24,7 +24,7 @@
 	<div class="container">
 		<div style="text-align:right; margin:5px ">
 			<a href="index.jsp">首頁</a>&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;
-			後臺管理</a>&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;商品上架
+			<a href="ArticleListPage.jsp">商品列表</a>&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;商品上架
 		</div>
 		<c:if test="${user.isValid() }">
 			<div class="col-lg-6 col-lg-offset-3 well bs-component">
@@ -34,28 +34,25 @@
 					<fieldset>
 						<legend style="text-align:center">商品上架</legend>
 						<div class="form-group">
-							<label for="inputAccount" class="col-lg-3 control-label">ID</label>
+							<label for="inputId" class="col-lg-3 control-label">ID</label>
 							<div class="col-lg-9">
-								<input type="text" class="form-control" id="id" name="id"><span
-									id="msg"></span>
+								<input type="text" class="form-control" id="id" name="id">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputAccount" class="col-lg-3 control-label">產品名稱</label>
+							<label for="inputName" class="col-lg-3 control-label">產品名稱</label>
 							<div class="col-lg-9">
-								<input type="text" class="form-control" id="name" name="name"><span
-									id="msg"></span>
+								<input type="text" class="form-control" id="name" name="name">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputAccount" class="col-lg-3 control-label">價格</label>
+							<label for="inputPrice" class="col-lg-3 control-label">價格</label>
 							<div class="col-lg-9">
-								<input type="text" class="form-control" id="price" name="price"><span
-									id="msg"></span>
+								<input type="text" class="form-control" id="price" name="price">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputCountry" class="col-lg-3 control-label">種類</label>
+							<label for="inputCotegory" class="col-lg-3 control-label">種類</label>
 							<div class="col-lg-9">
 								<select name="category" id="category" style="width:155px"
 									class="form-control">
@@ -68,30 +65,28 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputAccount" class="col-lg-3 control-label">庫存</label>
+							<label for="inputPnum" class="col-lg-3 control-label">庫存</label>
 							<div class="col-lg-9">
-								<input type="text" class="form-control" id="pnum" name="pnum"><span
-									id="msg"></span>
+								<input type="text" class="form-control" id="pnum" name="pnum">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputAccount" class="col-lg-3 control-label">圖片</label>
+							<label for="inputFile" class="col-lg-3 control-label">圖片</label>
 							<div class="col-lg-9 ">
-								<input type="file" name="file" id="file" class="form-control"><span
-									id="msg"></span>
+								<input type="file" name="file" id="file" class="form-control">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputAccount" class="col-lg-3 control-label">描述</label>
+							<label for="inputDescription" class="col-lg-3 control-label">描述</label>
 							<div class="col-lg-9">
 								<input type="text" class="form-control" name="description"
-									id="description"><span id="msg"></span>
+									id="description"><span id="msg">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-lg-10 col-lg-offset-2" style="text-align:right">
 								<div style="float:left">
-									<a href="ArticleListPage.jsp">商品列表</a>
+									<a href="ArticleListPage.jsp" style="float:left;position:absolute;bottom:12px;left:0">商品列表</a>
 								</div>
 								<input type="submit" value="上傳" class="btn btn-primary" />
 							</div>
@@ -100,8 +95,6 @@
 				</form>
 			</div>
 	</div>
-
-
 	</c:if>
 	<c:if test="${not user.isValid() }">
 		<div class="container">

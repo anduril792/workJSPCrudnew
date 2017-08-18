@@ -50,7 +50,7 @@
 		</div>
 		<br /> 商品：${b.name }
 		<hr />
-		售價：<font color="#FF0000">${b.price }元</font>
+		售價：${b.price }
 		<hr />
 		類別：${b.category }
 		<hr />

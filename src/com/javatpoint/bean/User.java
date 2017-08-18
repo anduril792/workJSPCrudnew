@@ -97,5 +97,27 @@ public class User
 		return false;
 
 	}
+	
+	public boolean isAdmin(){
+		List<User> list = UserDao.getAllRecords();
+
+		for (User e : list)
+		{
+			if (name != null && password != null)
+			{
+				if (name.equals(e.getName()) && password.equals(e.getPassword()))
+				{
+					if(50==e.getId()){
+						
+						return true;
+					}
+					
+				}
+			}
+		}
+		return false;
+		
+		
+	}
 
 }

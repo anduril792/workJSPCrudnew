@@ -49,7 +49,7 @@
 					</div>
 					<div class="panel-body">
 						<img src="${pageContext.request.contextPath}/images/ok.png"
-							width="26" height="26"><span id="second">5</span>秒後自動為您跳回首頁。
+							width="26" height="26"><span id="second">5</span>秒後自動為您跳回首頁，請重新登入。
 					</div>
 				</div>
 			</div>

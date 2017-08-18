@@ -5,7 +5,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:useBean id="user" class="com.javatpoint.bean.User" scope="session"></jsp:useBean>
 <jsp:setProperty property="*" name="user" />
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -33,9 +32,9 @@
 		} else if (pwd.value == "") {
 			alert("請填寫密碼。");
 			return false;
-		}
-		else
+		} else {
 			return true;
+		}
 	}
 </script>
 </head>
@@ -48,29 +47,27 @@
 		<div class="row ">
 			<div class="col-lg-4 col-lg-offset-4 well bs-component">
 				<form action="check.jsp" method="post" class="form-horizontal"
-					onsubmit="return check();">
+					id="loginform" onsubmit="return check();">
 					<fieldset>
 						<legend style="text-align:center">會員登入</legend>
-						<div class="form-group">
+						<div class="form-group" id="choose">
 							<label for="inputAccount" class="col-lg-3 control-label">帳號</label>
 							<div class="col-lg-9">
 								<input type="text" class="form-control" id="name" name="name"
-									placeholder="Name">
+									placeholder="Name"><span id="msg"></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputPassword" class="col-lg-3 control-label">密碼</label>
 							<div class="col-lg-9">
 								<input type="password" class="form-control" id="password"
-									name="password" placeholder="Password">
-								<div class="checkbox">
-									<label><input type="checkbox">記住我</label> <a
-										href="adduserform.jsp" style="float:right">註冊會員</a>
-								</div>
+									name="password" placeholder="Password"><span id="msg"></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-lg-10 col-lg-offset-2" style="text-align:right">
+								<a href="adduserform.jsp"
+									style="float:left;position:absolute;bottom:12px;left:0">註冊會員</a>
 								<input type="submit" value="登入" class="btn btn-primary" />
 							</div>
 						</div>

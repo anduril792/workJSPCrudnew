@@ -16,48 +16,33 @@
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
-	function check() {
-		var name = document.getElementById("name");
-		var msex = document.getElementById("msex").checked;
-		var fsex = document.getElementById("fsex").checked;
-		var pwd1 = document.getElementById("pwd1");
-		var pwd2 = document.getElementById("pwd2");
-
-		var obj = document.getElementById("name").value;
-		if (/.*[\u4e00-\u9fa5]+.*$/.test(obj)) {
-			alert("帳號不可為中文。");
-			return false;
-		}
-
-		if (name.value == "" || (msex == false && fsex == false)) {
-			if (name.value == "") {
-				alert("請填寫帳號。");
-				return false;
-			} else if (msex == false && fsex == false) {
-				alert("未選擇性別。");
-				return false;
-			}
-		}
-
-		return true;
-	}
-
+	var xhr = null;
 	window.onload = function() {
 		var nameElement = document.getElementById("name");
 		nameElement.onblur = function() {
 			var val = this.value;
-			var xhr = new XMLHttpRequest();
+			xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4) {
 					if (xhr.status == 200) {
 						var msg = document.getElementById("msg");
 						if (val == "") {
-							msg.innerHTML = "<font color='red'>帳號不可空白</font>";
+							msg.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;<font color=\"red\"><span class=\"glyphicon glyphicon-hand-up\" aria-hidden=\"true\" style=\"vertical-align:bottom\"></span>&nbsp;帳號不可空白</font>";
+							$("#userform").attr("onsubmit","return false;");
+							$("#choose").attr("class","form-group has-error");
+						}else if (!/^[a-zA-Z0-9]{4,8}$/.test(val)) {
+							msg.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;<font color=\"red\"><span class=\"glyphicon glyphicon-hand-up\" aria-hidden=\"true\" style=\"vertical-align:bottom\"></span>&nbsp;帳號需為4~8位英文字母或數字</font>";
+							$("#userform").attr("onsubmit","return false;");
+							$("#choose").attr("class","form-group has-error");
+							
 						} else if (xhr.responseText == "true") {
-							msg.innerHTML = "<font color='red'>帳號已存在</font>";
+							msg.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;<font color=\"red\"><span class=\"glyphicon glyphicon-hand-up\" aria-hidden=\"true\" style=\"vertical-align:bottom\"></span>&nbsp;帳號已存在</font>";							
+							$("#userform").attr("onsubmit","return false;");
+							$("#choose").attr("class","form-group has-error");
 						} else {
-							msg.innerHTML = "可以使用";
+							msg.innerHTML = "";
+							$("#userform").attr("onsubmit","return check();");
+							$("#choose").attr("class","form-group ");
 						}
 					}
 				}
@@ -65,6 +50,52 @@
 			xhr.open("get", "${pageContext.request.contextPath }/servlet/ckNameServlet?name=" + val);
 			xhr.send(null);
 		}
+	}
+
+	function check() {
+		var name = document.getElementById("name");
+		var msex = document.getElementById("msex").checked;
+		var fsex = document.getElementById("fsex").checked;
+		var pwd1 = document.getElementById("pwd1");
+		var pwd2 = document.getElementById("pwd2");
+		var email = document.getElementById("email");
+
+
+		if ("" == name.value) {
+			alert("帳號不可空白");
+			return false;
+		} else if (!/^[a-zA-Z0-9]{4,8}$/.test(name.value)) {
+			alert("帳號需為4~8位英文字母或數字");
+			return false;
+		} else if (xhr.responseText == "true") {
+			alert("帳號已存在");
+			return false;
+		}
+
+		if ("" == pwd1.value) {
+			alert("密碼不可空白");
+			return false;
+		} else if (!/^[a-zA-Z0-9]{4,8}$/.test(pwd1.value)) {
+			alert("密碼需為4~8位英文字母或數字");
+			return false;
+		}
+
+		if (pwd1.value != pwd2.value) {
+			alert("兩次密碼輸入不一致");
+			return false;
+		}
+
+		if (msex == false && fsex == false) {
+			alert("未選擇性別。");
+			return false;
+		}
+
+		if (!/^[^\s]+@[^\s]+\.[^\s]{2,3}$/.test(email.value)) {
+			alert("email格式不正確");
+			return false;
+		}
+
+		return true;
 	}
 </script>
 <body>
@@ -76,10 +107,10 @@
 		<div class="row ">
 			<div class="col-lg-6 col-lg-offset-3 well bs-component">
 				<form action="adduser.jsp" method="post" onsubmit="return check();"
-					name="userform" class="form-horizontal">
+					name="userform" id="userform" class="form-horizontal">
 					<fieldset>
 						<legend style="text-align:center">新會員註冊</legend>
-						<div class="form-group">
+						<div class="form-group" id="choose">
 							<label for="inputAccount" class="col-lg-3 control-label">帳號</label>
 							<div class="col-lg-9">
 								<input type="text" class="form-control" id="name" name="name"
@@ -103,16 +134,16 @@
 						<div class="form-group">
 							<label for="inputEmail" class="col-lg-3 control-label">電子信箱</label>
 							<div class="col-lg-9">
-								<input type="text" class="form-control" id="email" name="email"
+								<input type="email" class="form-control" id="email" name="email"
 									placeholder="Email">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputSex" class="col-lg-3 control-label">性別</label>
-							<div class="col-lg-9">
+							<div class="col-lg-9" style="line-height:32px">
 								<input type="radio" name="sex" id="msex" value="male"
-									checked="checked" /> 男 <input type="radio" name="sex"
-									id="fsex" value="female" /> 女
+									checked="checked"  /> 男 <input type="radio" name="sex"
+									id="fsex" value="female"  /> 女
 							</div>
 						</div>
 						<div class="form-group">

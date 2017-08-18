@@ -16,36 +16,46 @@
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
 	function check() {
 		var name = document.getElementById("name");
 		var msex = document.getElementById("msex").checked;
 		var fsex = document.getElementById("fsex").checked;
 		var pwd1 = document.getElementById("pwd1");
 		var pwd2 = document.getElementById("pwd2");
-
-		if (pwd1.value != pwd2.value) {
-			alert("密碼錯誤。");
+		var email = document.getElementById("email");
+		
+		
+		if(""==name.value){
+			alert("帳號不可空白");
+			return false;
+		}else if(!/^[a-zA-Z]{4,8}$/.test(name.value)){
+			alert("帳號需為4~8位英文字母");
 			return false;
 		}
-
-		var obj = document.getElementById("name").value;
-		if (/.*[\u4e00-\u9fa5]+.*$/.test(obj)) {
-			alert("帳號不可為中文。");
+		
+		if(""==pwd1.value){
+			alert("密碼不可空白");
+			return false;
+		}else if(!/^[a-zA-Z0-9]{4,8}$/.test(pwd1.value)){
+			alert("密碼需為4~8位英文字母或數字");
 			return false;
 		}
-
-		if (name.value == "" || (msex == false && fsex == false)) {
-			if (name.value == "") {
-				alert("請填寫帳號。");
-				return false;
-			} else if (msex == false && fsex == false) {
+		
+		if(pwd1.value!=pwd2.value){
+			alert("兩次密碼輸入不一致");
+			return false;
+		}	
+			
+		if (msex == false && fsex == false) {
 				alert("未選擇性別。");
-				return false;
-			}
-
-
+				return false;			
 		}
+		
+		if(!/^[^\s]+@[^\s]+\.[^\s]{2,3}$/.test(email.value)){
+			alert("email格式不正確");
+			return false;		
+		}
+
 		return true;
 	}
 </script>
@@ -63,6 +73,7 @@
 		request.setAttribute("c", country);	
 	%>
 	<div class="container">
+	<br/>
 		<div class="row ">
 			<div class="col-lg-6 col-lg-offset-3 well bs-component">
 				<form action="UserEditUser.jsp" method="post"
@@ -74,7 +85,7 @@
 							<label for="inputAccount" class="col-lg-3 control-label">帳號</label>
 							<div class="col-lg-9">
 								<input type="text" class="form-control" id="name" name="name"
-									placeholder="Name" value="<%=u.getName()%>"><span
+									placeholder="Name" value="<%=u.getName()%>" readonly="readonly" ><span
 									id="msg"></span>
 							</div>
 						</div>
@@ -102,9 +113,9 @@
 						</div>
 						<div class="form-group">
 							<label for="inputSex" class="col-lg-3 control-label">性別</label>
-							<div class="col-lg-9">
-								<input type="radio" name="sex" id="msex" value="male"
-									${s=="male"? "checked='checked'":"" }  /> 男 <input type="radio" name="sex"
+							<div class="col-lg-9" style="line-height:32px">
+								<input type="radio" name="sex" id="msex" value="male" 
+									${s=="male"? "checked='checked'":"" } /> 男 <input type="radio" name="sex"
 									id="fsex" value="female" ${s=="female"? "checked='checked'":"" } /> 女
 							</div>
 						</div>

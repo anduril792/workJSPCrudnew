@@ -41,9 +41,11 @@
 			<a href="index.jsp">首頁</a>&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;購物車
 		</div>
 		<c:if test="${not user.isValid() }">
-			<p>請登入會員。</p>
-			<a href="login.jsp">會員登入</a>&nbsp;&nbsp;&nbsp;
-			<a href="adduserform.jsp">註冊會員</a>
+			<div class="col-lg-4 col-lg-offset-4">
+				<p>請先登入會員。</p>
+				<a href="login.jsp" class="btn btn-primary">會員登入</a>&nbsp;&nbsp;&nbsp;
+				<a href="adduserform.jsp" class="btn btn-primary">註冊會員</a>
+			</div>
 		</c:if>
 		<c:if test="${ user.isValid() }">
 			<table class="table table-striped table-hover ">
@@ -92,7 +94,8 @@
 				<font style="color:#FF6600; font-weight:bold">合計：&nbsp;&nbsp;${sum}元</font>
 			</div>
 			<div style="text-align:right; margin-top:10px">
-				<a href="${pageContext.request.contextPath}/pageServlet?category=${pb.category }"><input
+				<a
+					href="${pageContext.request.contextPath}/pageServlet?category=BOSTON"><input
 					type="button" class="btn btn-success" value="繼續購物"></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;<a
 					href="${pageContext.request.contextPath}/order.jsp"><input

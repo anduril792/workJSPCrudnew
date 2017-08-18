@@ -80,7 +80,8 @@
 						<td>${o.getOrdertime()}</td>
 						<td>${o.getUserId()}</td>
 						<td><a href="deleteorder.jsp?id=${o.getId()}"
-							onclick="return confirm('確認刪除?')">Delete</a></td>
+							onclick="return confirm('確認刪除?')"><span
+								class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
