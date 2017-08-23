@@ -41,7 +41,22 @@
 				return false;
 			}
 		}	
-		
+	}
+	
+	function chkpid(id)
+	{
+		location.href = "${pageContext.request.contextPath}/ChkProductPnum?id=" + id ;
+	}
+	
+	function chkpidtest()
+	{
+		var pid = document.getElementsByName("pid");
+		for(i=0;i<pid.length;i++)
+			{
+				//alert(pid[i].innerHTML);
+				location.href = "${pageContext.request.contextPath}/ChkProductPnum?id=" + pid[i].innerHTML ;
+			}
+				return false;
 	}
 	
 </script>
@@ -65,6 +80,7 @@
 				<thead>
 					<tr>
 						<th>序號</th>
+						<th>商品編號</th>
 						<th>商品名稱</th>
 						<th>價格</th>
 						<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -80,12 +96,13 @@
 					<tbody>
 						<tr>
 							<td>${vs.count }</td>
+							<td id="pid" name="pid">${entry.key.id }</td>
 							<td>${entry.key.name }</td>
 							<td>$<fmt:formatNumber value="${entry.key.price }" pattern="#" type="number"/></td>
 							<td><input type="button" value='-' class="btn btn-xs btn-success" onclick="changeNum('${entry.key.id}','${entry.value-1 }','${entry.key.pnum }')"></td>
 							<td><input name="text" class="form-control input-sm" readonly="readonly" type="text" value="${entry.value }" style="width:36px;text-align:center" /></td>
 							<td><input type="button" class="btn btn-xs btn-success" value='+' onclick="changeNum('${entry.key.id}','${entry.value+1 }','${entry.key.pnum }')"></td>
-							<td id="stock" >${entry.key.pnum }</td>
+							<td id="stock" name="stock" >${entry.key.pnum }</td>
 							<td>$<fmt:formatNumber value="${entry.value*entry.key.price }" pattern="#" type="number"/></td>
 							<td><a href="${pageContext.request.contextPath}/changeNumServlet?id=${entry.key.id}&num=0"
 								style="color:red; font-weight:bold"
@@ -99,12 +116,10 @@
 				<font style="color:#FF6600; font-weight:bold">合計：&nbsp;&nbsp;<fmt:formatNumber value="${sum}" pattern="#" type="number"/>元</font>
 			</div>
 			<div style="text-align:right; margin-top:10px">
-				<a
-					href="${pageContext.request.contextPath}/pageServlet?category=BOSTON"><input
-					type="button" class="btn btn-success" value="繼續購物"></a>
-				&nbsp;&nbsp;&nbsp;&nbsp;<a
-					href="${pageContext.request.contextPath}/order.jsp"><input
-					type="button" class="btn btn-success" value="結帳" onclick="return ckStock()"></a>
+				<a href="${pageContext.request.contextPath}/pageServlet?category=BOSTON"><input type="button" class="btn btn-success" value="繼續購物"></a>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="${pageContext.request.contextPath}/order.jsp"><input type="button" class="btn btn-success" value="結帳" onclick="return chkpidtest();"></a>
+				
 			</div>
 		</c:if>
 	</div>

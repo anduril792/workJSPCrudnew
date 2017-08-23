@@ -132,7 +132,7 @@ public class ProductDaoForList
 		return list;
 	}
 
-	public static ProductForList getProductById(int id)
+	public ProductForList getProductById(int id)
 	{
 		ProductForList p = null;
 		try
