@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -32,9 +33,15 @@
 		location.href = "${pageContext.request.contextPath}/changeNumServlet?id=" + id + "&num=" + num;
 	}
 	
-	function chkpnum()
-	{
-		if(cart.)
+	function ckStock(){		
+		var stock = document.getElementsByName("stock");		
+		for(i=0;i<stock.length;i++){
+			if(stock[i].innerHTML<=0){
+				alert("第"+(i+1)+"項商品已無庫存");
+				return false;
+			}
+		}	
+		
 	}
 	
 </script>
@@ -74,21 +81,13 @@
 						<tr>
 							<td>${vs.count }</td>
 							<td>${entry.key.name }</td>
-							<td>${entry.key.price }</td>
-							<td><input type="button" value='-'
-								class="btn btn-xs btn-success"
-								onclick="changeNum('${entry.key.id}','${entry.value-1 }','${entry.key.pnum }')"></td>
-							<td><input name="text" class="form-control input-sm"
-								readonly="readonly" type="text" value="${entry.value }"
-								style="width:36px;text-align:center" /></td>
-							<td><input type="button" class="btn btn-xs btn-success"
-								value='+'
-								onclick="changeNum('${entry.key.id}','${entry.value+1 }','${entry.key.pnum }')"></td>
-							</td>
-							<td>${entry.key.pnum }</td>
-							<td>${entry.value*entry.key.price }</td>
-							<td><a
-								href="${pageContext.request.contextPath}/changeNumServlet?id=${entry.key.id}&num=0"
+							<td>$<fmt:formatNumber value="${entry.key.price }" pattern="#" type="number"/></td>
+							<td><input type="button" value='-' class="btn btn-xs btn-success" onclick="changeNum('${entry.key.id}','${entry.value-1 }','${entry.key.pnum }')"></td>
+							<td><input name="text" class="form-control input-sm" readonly="readonly" type="text" value="${entry.value }" style="width:36px;text-align:center" /></td>
+							<td><input type="button" class="btn btn-xs btn-success" value='+' onclick="changeNum('${entry.key.id}','${entry.value+1 }','${entry.key.pnum }')"></td>
+							<td id="stock" >${entry.key.pnum }</td>
+							<td>$<fmt:formatNumber value="${entry.value*entry.key.price }" pattern="#" type="number"/></td>
+							<td><a href="${pageContext.request.contextPath}/changeNumServlet?id=${entry.key.id}&num=0"
 								style="color:red; font-weight:bold"
 								onclick="return confirm('確認刪除?')">X</a></td>
 						</tr>
@@ -97,7 +96,7 @@
 				</c:forEach>
 			</table>
 			<div style="text-align:right; padding-right:40px;">
-				<font style="color:#FF6600; font-weight:bold">合計：&nbsp;&nbsp;${sum}元</font>
+				<font style="color:#FF6600; font-weight:bold">合計：&nbsp;&nbsp;<fmt:formatNumber value="${sum}" pattern="#" type="number"/>元</font>
 			</div>
 			<div style="text-align:right; margin-top:10px">
 				<a
@@ -105,7 +104,7 @@
 					type="button" class="btn btn-success" value="繼續購物"></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;<a
 					href="${pageContext.request.contextPath}/order.jsp"><input
-					type="button" class="btn btn-success" value="結帳" onclick="changeNum('${entry.key.id}','${entry.value-1 }','${entry.key.pnum }')"></a>
+					type="button" class="btn btn-success" value="結帳" onclick="return ckStock()"></a>
 			</div>
 		</c:if>
 	</div>
