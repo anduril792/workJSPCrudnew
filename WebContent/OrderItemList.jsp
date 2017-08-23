@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" import="com.javatpoint.dao.*,com.javatpoint.bean.*,java.util.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	String orderid = request.getParameter("oid");
@@ -40,7 +41,7 @@
 					<tr>
 						<td>${o.getOrderId()}</td>
 						<td>${o.getId()}</td>
-						<td>${o.getMoney()}</td>
+						<td>$<fmt:formatNumber value="${o.getPrice()}" pattern="#" type="number" /></td>
 						<td>${o.getName()}</td>
 						<td><img src="${o.getImg_url()}" width="150px"></td>
 						<td>${o.getBuynum()}</td>

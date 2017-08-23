@@ -31,6 +31,12 @@
 		}
 		location.href = "${pageContext.request.contextPath}/changeNumServlet?id=" + id + "&num=" + num;
 	}
+	
+	function chkpnum()
+	{
+		if(cart.)
+	}
+	
 </script>
 
 </head>
@@ -99,7 +105,7 @@
 					type="button" class="btn btn-success" value="繼續購物"></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;<a
 					href="${pageContext.request.contextPath}/order.jsp"><input
-					type="button" class="btn btn-success" value="結帳"></a>
+					type="button" class="btn btn-success" value="結帳" onclick="changeNum('${entry.key.id}','${entry.value-1 }','${entry.key.pnum }')"></a>
 			</div>
 		</c:if>
 	</div>

@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="zh-Hant">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -50,7 +51,7 @@
 		</div>
 		<br /> 商品：${b.name }
 		<hr />
-		售價：${b.price }
+		售價：$<fmt:formatNumber value="${b.price}" pattern="#" type="number"/>
 		<hr />
 		類別：${b.category }
 		<hr />

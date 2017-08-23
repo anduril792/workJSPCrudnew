@@ -1,5 +1,6 @@
 <%@page import="com.javatpoint.dao.*,com.javatpoint.bean.*,java.util.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -14,7 +15,7 @@
 			pagesize = Integer.valueOf(strPage) * 10;
 		} else {
 			pagenum = Integer.valueOf(strPage) * 10 - 10;
-			pagesize = Integer.valueOf(strPage) * 10 - 1;
+			pagesize = 10;
 		}
 	}
 	List<OrderForList> list =  OrderDaoForList.getAllOrderByPage(pagenum, pagesize);
@@ -72,7 +73,7 @@
 				<c:forEach items="${list}" var="o">
 					<tr>
 						<td>${o.getId()}</td>
-						<td>${o.getMoney()}</td>
+						<td>$<fmt:formatNumber value="${o.getMoney()}" pattern="#" type="number"/></td>
 						<td>${o.getReceiverAddress()}</td>
 						<td>${o.getReceiverName()}</td>
 						<td>${o.getReceiverPhone()}</td>

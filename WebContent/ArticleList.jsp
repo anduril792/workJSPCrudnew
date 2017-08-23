@@ -1,5 +1,6 @@
 <%@page import="com.javatpoint.dao.*,com.javatpoint.bean.*,java.util.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <body>
@@ -15,7 +16,7 @@
 				pagesize = Integer.valueOf(strPage) * 10;
 			} else {
 				pagenum = Integer.valueOf(strPage) * 10 - 10;
-				pagesize = Integer.valueOf(strPage) * 10 - 1;
+				pagesize = 10;
 			}
 		}
 
@@ -68,16 +69,13 @@
 					<tr>
 						<td>${p.getId()}</td>
 						<td>${p.getName()}</td>
-						<td>${p.getPrice()}</td>
+						<td>$<fmt:formatNumber value="${p.getPrice()}" pattern="#" type="number"/></td>
 						<td>${p.getCategory()}</td>
 						<td>${p.getPnum()}</td>
 						<td><img src="${p.getImg_url()}" width="150px"></td>
 						<td>${p.getDescription()}</td>
-						<td><a href="editArticleform.jsp?id=${p.getId()}"><span
-								class="glyphicon glyphicon-pencil" aria-hidden="true"></a></td>
-						<td><a href="delArticle.jsp?id=${p.getId()}"
-							onclick="return confirm('確認刪除?')"><span
-								class="glyphicon glyphicon-trash" aria-hidden="true"></a></td>
+						<td><a href="editArticleform.jsp?id=${p.getId()}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></a></td>
+						<td><a href="delArticle.jsp?id=${p.getId()}" onclick="return confirm('確認刪除?')"><span class="glyphicon glyphicon-trash" aria-hidden="true"></a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

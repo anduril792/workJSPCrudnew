@@ -27,7 +27,7 @@
 			pagesize = Integer.valueOf(strPage) * 10;
 		} else {
 			pagenum = Integer.valueOf(strPage) * 10 - 10;
-			pagesize = Integer.valueOf(strPage) * 10 - 1;
+			pagesize = 10;
 		}
 	}
 	List<User> list = UserDao.getAllUsersByPage(pagenum, pagesize);
