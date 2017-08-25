@@ -107,7 +107,7 @@ public class User
 			{
 				if (name.equals(e.getName()) && password.equals(e.getPassword()))
 				{
-					if(57==e.getId()){
+					if(50==e.getId()){
 						
 						return true;
 					}

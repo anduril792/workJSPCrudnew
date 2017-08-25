@@ -31,7 +31,7 @@
 		}
 	}
 	
-	List<Msg> list = MsgDao.getAllMsg();
+	List<Msg> list = MsgDao.getAllMsgByPage(pagenum, pagesize);
 	request.setCharacterEncoding("UTF-8");
 	request.setAttribute("list", list);
 	
@@ -48,7 +48,7 @@
 		</div>
 		<h3>訊息列表</h3>
 		<div align="right">
-			<form action="OrderListPage.jsp" id="pageform" method="get">
+			<form action="MsgListPage.jsp" id="pageform" method="get">
 				<select name="page" id="page" onchange="pageform.submit()">
 					<%
 						for (int i = 1; i <= TotalPage; i++) {

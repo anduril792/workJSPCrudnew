@@ -126,6 +126,31 @@ public class MsgDao
 		return m;
 	}
 	
+	public static List<Msg> getAllMsgByPage(int page, int pagesize)
+	{
+		List<Msg> list = new ArrayList<Msg>();
+		int mypage = page;
+		try
+		{
+			Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement("select * from msg limit ?,?");
+			ps.setInt(1, mypage);
+			ps.setInt(2, pagesize);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next())
+			{
+				list.add(new Msg(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)));
+			}
+			ps.close();
+			con.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+		}
+		return list;
+	}
+	
 	public static int MsgSize()
 	{
 		int result = 0;

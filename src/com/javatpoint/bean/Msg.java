@@ -7,13 +7,22 @@ public class Msg
 
 	public Msg() {}
 	
+	public Msg(int idMsg,String name, String email, String subject, String message)
+	{
+		this.idMsg = idMsg;
+	    this.name = name;
+	    this.email = email;
+	    this.subject = subject;
+	    this.message = message;
+	}
+	
 	public Msg(String name, String email, String subject, String message)
-	    {
-	        this.name = name;
-	        this.email = email;
-	        this.subject = subject;
-	        this.message = message;
-	    }
+	{
+	    this.name = name;
+	    this.email = email;
+	    this.subject = subject;
+	    this.message = message;
+	}
 	
 	//delete¨Ï¥Î
 	public Msg(int idMsg)
