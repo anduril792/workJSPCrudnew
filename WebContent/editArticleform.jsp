@@ -3,7 +3,7 @@
 <%@page import="com.javatpoint.dao.*,com.javatpoint.bean.*"%>
 <%
 	String id = request.getParameter("id");
-	ProductForList p = ProductDaoForList.getProductById(Integer.parseInt(id));
+	ProductForList p = ProductDaoForList.getProductById(Integer.valueOf(id));
 
 	String category = p.getCategory();
 	request.setAttribute("c", category);
